@@ -1,0 +1,11 @@
+{
+  "name": "leetcodeFavorites",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:davidsu/leetcodeFavorites.git",
+  "author": "David <davidsu@wix.com>",
+  "license": "MIT",
+  "dependencies": {
+    "leetcode-cli": "davidsu/leetcode-cli#master"
+  }
+}
