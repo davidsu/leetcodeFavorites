@@ -6,6 +6,7 @@
   "author": "David <davidsu@wix.com>",
   "license": "MIT",
   "dependencies": {
-    "leetcode-cli": "davidsu/leetcode-cli#master"
+    "leetcode-cli": "davidsu/leetcode-cli#master",
+    "p-map": "^3.0.0"
   }
 }
