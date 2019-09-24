@@ -3,61 +3,68 @@ const Plugin = require('./node_modules/leetcode-cli/lib/plugin')
 const cli = require('./node_modules/leetcode-cli/lib/cli')
 const core = require('./node_modules/leetcode-cli/lib/core')
 const cp = require('child_process')
+const path = require('path')
 
-function sortProblemByLike(error, problems, problem) {
-    if(!problems) {
-        return new Promise(r => {
-            core.filterProblems({query: 'D'}, (a,b,c) => {
-                r(sortProblemByLike(a,b,c))
-            })
+function getAllProblems() {
+    return new Promise((resolve, reject) => {
+        core.filterProblems({query: 'D'}, (error, problems) => {
+            error ? reject(error) : resolve(problems)
         })
-    }
-    const problemsLikes = []
-    let prom = Promise.resolve()
-    for(let p of problems) {
-        // core.getProblem(p.id, () => {})
-        prom = prom.then(() => new Promise(r => {
-            core.getProblem(p.id, (e, problem) => {
-                if(!e) {
-                    let {likes, dislikes, link} = problem
-                    problemsLikes.push({likes, dislikes, link})
-                }
-                r()
-            })
-        })).catch()
-    }
-    debugger
-    return prom.then( () => {
-        const res = problemsLikes.sort((a, b) => b.likes - a.likes)
-        return problemsLikes
     })
+
 }
+async function sortProblemByLike() {
+    const problems = await getAllProblems()
+    const mapper = ({id}) => new Promise(resolve => {
+        core.getProblem(id, (e, problem) => {
+            if(e) resolve() //probably locked problem, I don't care
+            let {likes, dislikes, link, id} = problem
+            resolve({likes, dislikes, link, id})
+        })
+    })
+    return (await Promise.allSettled(problems.map(mapper)))
+            .filter(promise => !!promise.value)
+            .map(promise => promise.value)
+            .sort((a, b) => b.likes - a.likes)
+}
+
 function getProblemFromReviewList() {
-    Plugin.plugins[2].getFavorites((_, {favorites}) => {
-        const questions = favorites.private_favorites.find(f => f.name == 'review').questions
-        const problem = questions[Math.floor(Math.random() * questions.length)]
-        core.getProblem(problem.id, (e, problem) => {
-            require('child_process').execSync(`open ${problem.link}`)
+    return new Promise(resolve => {
+        Plugin.plugins[2].getFavorites((_, {favorites}) => {
+            const questions = favorites.private_favorites.find(f => f.name == 'Favorite').questions
+            const problem = questions[Math.floor(Math.random() * questions.length)]
+            core.getProblem(problem.id, (e, problem) => {
+                resolve(problem.id)
+            })
         })
     })
 }
 
-cli.run()
 
-const getRandom = () => {
-    return sortProblemByLike().then(p => {
-        const idx = Math.floor(Math.random() * 20)
-        cp.execSync(`open ${p[idx].link}`)
-        return p
-    })
+function showAndGenerateProblem(id) {
+    const command = `${path.resolve(__dirname, 'node_modules/.bin/leetcode')} show ${id} -g -o /tmp/leetcode -l javascript` 
+    cp.execSync(command, {stdio: [0,1,2]})
 }
-if(process.argv.length > 2) {
-    getRandom().then(p => p.forEach(p =>console.log(JSON.stringify(p))))
-} else if(Math.floor(Math.random() * 5) == 1) {
-    console.log('getting random')
-    getRandom()
-} else {
-    console.log('getting from list')
-    getProblemFromReviewList()
+async function getRandom() {
+    const problems = await sortProblemByLike()
+    const idx = Math.floor(Math.random() * 20)
+    return problems[idx].id
 }
+
+if(process.argv.length > 3) { //delegate to leetcode-cli and exit
+    cli.run()
+    return
+}
+(async () => {
+    cli.run()
+    if(process.argv.length > 2) {
+        sortProblemByLike().then(p => p.forEach(p =>console.log(JSON.stringify(p))))
+    } else if(Math.floor(Math.random() * 5) == 1) {
+        console.log('getting random')
+        showAndGenerateProblem(await getRandom())
+    } else {
+        console.log('getting from list')
+        showAndGenerateProblem(await getProblemFromReviewList())
+    }
+})()
 
