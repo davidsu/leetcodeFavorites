@@ -4,6 +4,7 @@ const cli = require('./node_modules/leetcode-cli/lib/cli')
 const core = require('./node_modules/leetcode-cli/lib/core')
 const cp = require('child_process')
 const path = require('path')
+const fs = require('fs')
 
 function getAllProblems() {
     return new Promise((resolve, reject) => {
@@ -18,8 +19,8 @@ async function sortProblemByLike() {
     const mapper = ({id}) => new Promise(resolve => {
         core.getProblem(id, (e, problem) => {
             if(e) resolve() //probably locked problem, I don't care
-            let {likes, dislikes, link, id} = problem
-            resolve({likes, dislikes, link, id})
+            let {likes, dislikes, link, id, slug} = problem
+            resolve({likes, dislikes, link, id, slug})
         })
     })
     return (await Promise.allSettled(problems.map(mapper)))
@@ -34,21 +35,50 @@ function getProblemFromReviewList() {
             const questions = favorites.private_favorites.find(f => f.name == 'Favorite').questions
             const problem = questions[Math.floor(Math.random() * questions.length)]
             core.getProblem(problem.id, (e, problem) => {
-                resolve(problem.id)
+                console.log(JSON.stringify(problem))
+                resolve(problem)
             })
         })
     })
 }
 
+const testTemplate = testName => `
+const {testFunc} = require('../src/${testName}.js')
+describe('${testName}', () => {
+    it('should ...', () => {
+        expect(true).toBe(false)
+    })
+})
+`
 
-function showAndGenerateProblem(id) {
-    const command = `${path.resolve(__dirname, 'node_modules/.bin/leetcode')} show ${id} -g -o /tmp/leetcode -l javascript` 
+const fileName = ({id, slug}) => `${id}.${slug}`
+
+function generateTestIfNeeded({id, slug}) {
+    if(!slug) console.log(JSON.stringify(arguments[0]))
+    const testName = fileName({id, slug})
+    const testFileName = `${__dirname}/test/${testName}.test.js`
+    if(!fs.existsSync(testFileName)) {
+        fs.writeFileSync(testFileName, testTemplate(testName))
+    }
+}
+
+function addExportToSrc({id, slug}) {
+    const filePath = `${__dirname}/src/${fileName({id, slug})}.js`
+    fs.appendFileSync(filePath, "\nmodule.exports = {\n\ttestFunc: null\n}") 
+}
+
+function showAndGenerateProblem({id, slug}) {
+    const command = `${path.resolve(__dirname, 'node_modules/.bin/leetcode')} show ${id} -xg -o ${__dirname}/src -l javascript` 
     cp.execSync(command, {stdio: [0,1,2]})
+    generateTestIfNeeded({id, slug})
+    addExportToSrc({id, slug})
+
 }
 async function getRandom() {
     const problems = await sortProblemByLike()
     const idx = Math.floor(Math.random() * 20)
-    return problems[idx].id
+    console.log(JSON.stringify(problems[idx]))
+    return problems[idx]
 }
 
 if(process.argv.length > 3) { //delegate to leetcode-cli and exit

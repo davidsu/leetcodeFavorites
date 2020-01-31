@@ -6,6 +6,19 @@
   "author": "David <davidsu@wix.com>",
   "license": "MIT",
   "dependencies": {
+    "jest": "^25.1.0",
     "leetcode-cli": "davidsu/leetcode-cli#master"
+  },
+  "scripts": {
+    "test": "jest",
+    "problem": "node ./index.js"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
   }
 }
