@@ -41,8 +41,8 @@ function getProblemFromReviewList () {
     })
 }
 
-const testTemplate = testName => `
-const {testFunc} = require('../src/${testName}.js')
+const testTemplate = testName =>
+    `const {testFunc} = require('../src/${testName}.js')
 describe('${testName}', () => {
     it('should ...', () => {
         expect(true).toBe(false)
