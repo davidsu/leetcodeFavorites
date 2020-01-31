@@ -1,5 +1,4 @@
-![Node.js CI](https://github.com/davidsu/leetcodeFavorites/workflows/Node.js%20CI/badge.svg?branch=master)
-# USAGE
+# USAGE &middot; ![Node.js CI](https://github.com/davidsu/leetcodeFavorites/workflows/Node.js%20CI/badge.svg?branch=master)
 
 first you'll need to let leetcode-cli create cache your usename/password: `yarn leetcode user -l`
 
