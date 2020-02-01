@@ -85,7 +85,7 @@ function * generateAllDistanceOneWords (word) {
     }
 }
 
-var ladderLength = function (beginWord, endWord, wordList) {
+function ladderLength (beginWord, endWord, wordList) {
     if (beginWord === endWord) return 0
     const next = [[beginWord, 1]]
     let idx = 0
