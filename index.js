@@ -87,7 +87,7 @@ if (process.argv.length > 3) { // delegate to leetcode-cli and exit
         cli.run()
         if (process.argv.length > 2) {
             sortProblemByLike().then(p => p.forEach(p => console.log(JSON.stringify(p))))
-        } else if (Math.floor(Math.random() * 5) === 1) {
+        } else if (Math.random() < 0.15) {
             console.log('getting random')
             showAndGenerateProblem(await getRandom())
         } else {
