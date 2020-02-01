@@ -16,6 +16,8 @@ module.exports = {
   },
   rules: {
     'indent': ['error',4],
+    'no-irregular-whitespace': 'off',
+    'no-console': 'error'
 
   }
 }

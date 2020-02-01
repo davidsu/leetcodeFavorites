@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 const Plugin = require('./node_modules/leetcode-cli/lib/plugin')
 const cli = require('./node_modules/leetcode-cli/lib/cli')
 const core = require('./node_modules/leetcode-cli/lib/core')
