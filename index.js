@@ -43,10 +43,11 @@ function getProblemFromReviewList () {
 }
 
 const testTemplate = testName =>
-    `const {testFunc} = require('../src/${testName}.js')
+/* eslint-disable-next-line */
+`const {testFunc} = require('../src/${testName}.js')
 describe('${testName}', () => {
-    it('should ...', () => {
-        expect(true).toBe(false)
+    it('case 1', () => {
+        expect(testFunc()).toEqual(false)
     })
 })
 `
