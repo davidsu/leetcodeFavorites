@@ -35,7 +35,6 @@ function getProblemFromReviewList () {
             const questions = favorites.private_favorites.find(f => f.name === 'Favorite').questions
             const problem = questions[Math.floor(Math.random() * questions.length)]
             core.getProblem(problem.id, (e, problem) => {
-                console.log(JSON.stringify(problem))
                 resolve(problem)
             })
         })
@@ -44,8 +43,10 @@ function getProblemFromReviewList () {
 
 const testTemplate = testName =>
 /* eslint-disable-next-line */
-`const {testFunc} = require('../src/${testName}.js')
-describe('${testName}', () => {
+`const testFuncs = require('../src/${testName}.js')
+describe.each(
+    Object.entries(testFuncs)
+)('%s', (_, testFunc) => {
     it('case 1', () => {
         expect(testFunc()).toEqual(false)
     })
@@ -55,7 +56,6 @@ describe('${testName}', () => {
 const fileName = ({ id, slug }) => `${id}.${slug}`
 
 function generateTestIfNeeded ({ id, slug }) {
-    if (!slug) console.log(JSON.stringify(arguments[0]))
     const testName = fileName({ id, slug })
     const testFileName = `${__dirname}/test/${testName}.test.js`
     if (!fs.existsSync(testFileName)) {
@@ -77,7 +77,6 @@ function showAndGenerateProblem ({ id, slug }) {
 async function getRandom () {
     const problems = await sortProblemByLike()
     const idx = Math.floor(Math.random() * 20)
-    console.log(JSON.stringify(problems[idx]))
     return problems[idx]
 }
 
