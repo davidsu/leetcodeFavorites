@@ -18,7 +18,7 @@ async function sortProblemByLike () {
     const problems = await getAllProblems()
     const mapper = ({ id }) => new Promise(resolve => {
         core.getProblem(id, (e, problem) => {
-            if (e) resolve() // probably locked problem, I don't care
+            if (e) return resolve() // probably locked problem, I don't care
             const { likes, dislikes, link, id, slug } = problem
             resolve({ likes, dislikes, link, id, slug })
         })
