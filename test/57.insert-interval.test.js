@@ -4,7 +4,6 @@ describe.each(
 )('%s', (_, testFunc) => {
     it('case 1', () => {
         const result = testFunc([[1, 3], [6, 9]], [2, 5])
-        console.log('result: ', result)
         expect(result).toEqual([[1, 5], [6, 9]])
     })
     it('case 2', () => {
