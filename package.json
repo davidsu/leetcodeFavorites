@@ -6,6 +6,7 @@
   "author": "David <davidsu@wix.com>",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^3.0.0",
     "jest": "^25.1.0",
     "leetcode-cli": "davidsu/leetcode-cli#master"
   },
