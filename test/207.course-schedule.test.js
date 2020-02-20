@@ -5,7 +5,10 @@ describe.each(
     it('case 1', () => {
         expect(testFunc(2, [[1, 0]])).toEqual(true)
     })
-    it('case 1', () => {
+    it('case 2', () => {
         expect(testFunc(2, [[1, 0], [0, 1]])).toEqual(false)
+    })
+    it('case 3', () => {
+        expect(testFunc(4, [[3, 0], [0, 1]])).toEqual(true)
     })
 })

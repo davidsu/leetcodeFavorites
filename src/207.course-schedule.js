@@ -53,7 +53,7 @@
  * @param {number[][]} prerequisites
  * @return {boolean}
  */
-var canFinish = function (numCourses, prerequisites) {
+function canFinish (numCourses, prerequisites) {
     const courses = new Array(numCourses).fill(false)
     const graph = courses.map((_, course) => ({
         next: [],
@@ -77,6 +77,31 @@ var canFinish = function (numCourses, prerequisites) {
     return courses.every(a => a)
 }
 
+function betterPerformance (_, prerequisites) {
+    const courses = prerequisites.reduce((acc, [course, pre]) => {
+        acc[course] = acc[course] || { next: [], prerequisiteCount: 0, id: course }
+        acc[pre] = acc[pre] || { next: [], prerequisiteCount: 0, id: pre }
+        acc[course].prerequisiteCount++
+        acc[pre].next.push(course)
+        return acc
+    }, {})
+    const coursesArr = Object.values(courses)
+    const completed = coursesArr.filter(({ prerequisiteCount }) => !prerequisiteCount)
+    while (completed.length) {
+        const { next, id } = completed.pop()
+        delete courses[id]
+        next.forEach(nextCourse => {
+            const course = courses[nextCourse]
+            course.prerequisiteCount--
+            if (!course.prerequisiteCount) {
+                completed.push(course)
+            }
+        })
+    }
+    return !Object.keys(courses).length
+}
+
 module.exports = {
-    canFinish
+    canFinish,
+    betterPerformance
 }
