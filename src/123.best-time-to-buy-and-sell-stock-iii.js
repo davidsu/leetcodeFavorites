@@ -56,7 +56,20 @@
  * @return {number}
  */
 function maxProfit (prices) {
-    // TODO
+    let firstBuy = Infinity
+    let secondBuy = Infinity
+    let firstProfit = 0
+    let secondProfit = 0
+    for (const price of prices) {
+        firstBuy = Math.min(firstBuy, price)
+        firstProfit = Math.max(firstProfit, price - firstBuy)
+
+        // secondBuy's price is the price of current stock - the profit we made from the first transaction
+        // this way if we made 0 on first transaction(it never took place) then we are investing the total price of the stock
+        secondBuy = Math.min(secondBuy, price - firstProfit)
+        secondProfit = Math.max(secondProfit, price - secondBuy)
+    }
+    return secondProfit
 }
 
 module.exports = {

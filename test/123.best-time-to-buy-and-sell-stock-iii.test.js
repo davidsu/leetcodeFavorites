@@ -1,10 +1,11 @@
 const testFuncs = require('../src/123.best-time-to-buy-and-sell-stock-iii.js')
-xdescribe.each(
+describe.each(
     Object.entries(testFuncs)
 )('%s', (_, testFunc) => {
     it('case 1', () => {
         expect(testFunc([3, 3, 5, 0, 0, 3, 1, 4])).toEqual(6)
     })
+
     it('case 2', () => {
         expect(testFunc([1, 2, 3, 4, 5])).toEqual(4)
     })
