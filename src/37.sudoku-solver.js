@@ -62,7 +62,7 @@
 //     // }, '')
 //     process.stdout.write(`${result}\n-------------------------------------------`)
 // }
-var solveSudoku = function (board) {
+const solveSudoku = function (board) {
     function * colGenerator (col) {
         for (const row of board) {
             yield row[col]

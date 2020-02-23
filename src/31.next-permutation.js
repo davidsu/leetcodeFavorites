@@ -31,7 +31,7 @@
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-var nextPermutation = function (nums) {
+const nextPermutation = function (nums) {
     if (!nums || nums.length < 2) return nums
     const getLastOutOfOrder = () => {
         let last = nums.length - 1

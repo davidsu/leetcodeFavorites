@@ -55,7 +55,7 @@
 /**
 * Initialize your data structure here.
 */
-var RandomizedSet = function () {
+const RandomizedSet = function () {
     const map = new Map()
     const values = []
     function swap (idx) {

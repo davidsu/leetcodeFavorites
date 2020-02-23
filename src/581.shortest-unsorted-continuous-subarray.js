@@ -37,7 +37,7 @@
  * @param {number[]} nums
  * @return {number}
  */
-var findUnsortedSubarray = function (nums) {
+const findUnsortedSubarray = function (nums) {
     const sorted = [...nums].sort((a, b) => a - b)
     let start = 0
     let end = nums.length - 1

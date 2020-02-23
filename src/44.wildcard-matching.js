@@ -86,7 +86,7 @@
  * @param {string} p
  * @return {boolean}
  */
-var isMatch = function (s, p) {
+const isMatch = function (s, p) {
     const seen = new Set()
     const matchChar = (idxS, idxP) => s[idxS] === p[idxP] && matches(idxS + 1, idxP + 1)
     const matchSingle = (idxS, idxP) => p[idxP] === '?' && matches(idxS + 1, idxP + 1)

@@ -45,7 +45,7 @@ const reverse = (head, prev = null) => {
     head.next = prev
     return next ? reverse(next, head) : head
 }
-var isPalindrome = function (head) {
+const isPalindrome = function (head) {
     if (!head || !head.next) return true
     let slow = head; let fast = head.next
     while (fast && fast.next) {

@@ -55,7 +55,7 @@
  * @return {number}
  */
 // see https://leetcode.com/problems/path-sum-iii/discuss/141424/Python-step-by-step-walk-through.-Easy-to-understand.-Two-solutions-comparison.-%3A-
-var pathSum = function (root, sum) {
+const pathSum = function (root, sum) {
     const freq = { 0: 1 }
     function dfs (root, currSum) {
         if (!root) return 0
