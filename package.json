@@ -8,12 +8,13 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "jest": "^25.1.0",
-    "leetcode-cli": "davidsu/leetcode-cli#master"
+    "leetcode-cli": "davidsu/leetcode-cli#master",
+    "yargs": "^15.3.1"
   },
   "scripts": {
     "lint": "eslint .",
     "test": "jest",
-    "problem": "node ./index.js"
+    "problem": "node ./index.js random"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

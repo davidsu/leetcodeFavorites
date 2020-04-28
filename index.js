@@ -6,6 +6,7 @@ const core = require('./node_modules/leetcode-cli/lib/core')
 const cp = require('child_process')
 const path = require('path')
 const fs = require('fs')
+const yargs = require('yargs')
 
 function getAllProblems () {
     return new Promise((resolve, reject) => {
@@ -35,6 +36,7 @@ function getProblemFromReviewList () {
             const questions = favorites.private_favorites.find(f => f.name === 'Favorite').questions
             const problem = questions[Math.floor(Math.random() * questions.length)]
             core.getProblem(problem.id, (e, problem) => {
+                console.log(JSON.stringify({ problem }))
                 resolve(problem)
             })
         })
@@ -76,23 +78,34 @@ function showAndGenerateProblem ({ id, slug }) {
 }
 async function getRandom () {
     const problems = await sortProblemByLike()
-    const idx = Math.floor(Math.random() * 20)
+    const idx = Math.floor(Math.random() * 300)
     return problems[idx]
 }
 
-if (process.argv.length > 3) { // delegate to leetcode-cli and exit
+if (!yargs.argv.h) {
     cli.run()
-} else {
-    (async () => {
-        cli.run()
-        if (process.argv.length > 2) {
-            sortProblemByLike().then(p => p.forEach(p => console.log(JSON.stringify(p))))
-        } else if (Math.random() < 0.15) {
-            console.log('getting random')
-            showAndGenerateProblem(await getRandom())
-        } else {
-            console.log('getting from list')
-            showAndGenerateProblem(await getProblemFromReviewList())
-        }
-    })()
 }
+
+yargs // eslint-disable-line no-unused-expressions
+    .command('$0', 'delegate to leetcode-cli', () => {}, () => cli.run())
+    .command({
+        command: 'random',
+        aliases: ['r'],
+        desc: 'select for you a random problem',
+        handler: async () => showAndGenerateProblem(await getRandom())
+    })
+    .command({
+        command: 'favorites',
+        aliases: ['f'],
+        desc: 'randomly select problem from review list',
+        handler: async () => showAndGenerateProblem(await getProblemFromReviewList())
+    })
+    .command({
+        command: 'list-by-like',
+        aliases: ['l'],
+        desc: 'list all problems sorted by like',
+        handler: () => sortProblemByLike().then(p => p.forEach(p => console.log(JSON.stringify(p))))
+    })
+    .help('h')
+    .alias('h', 'help')
+    .argv
