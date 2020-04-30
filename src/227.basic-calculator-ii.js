@@ -61,6 +61,38 @@ const calculate = function (s) {
     return Number(expression)
 }
 
+function runOp (num, sign, stack) {
+    switch (sign) {
+    case '+':
+        return stack.push(num)
+    case '-':
+        return stack.push(-num)
+    case '*':
+        return stack.push(num * stack.pop())
+    }
+    const result = stack.pop() / num
+    stack.push(result > 0 ? Math.floor(result) : Math.ceil(result))
+}
+const stackBased = s => {
+    let sign = '+'
+    let num = 0
+    const stack = []
+    const isNumRegex = /\d/
+    const isNum = n => isNumRegex.test(n)
+    for (const c of s.replace(/\s+/g, '').split('')) {
+        if (isNum(c)) {
+            num = num * 10 + Number(c)
+        } else {
+            runOp(num, sign, stack)
+            sign = c
+            num = 0
+        }
+    }
+    runOp(num, sign, stack)
+    return stack.reduce((res, num) => res + num)
+}
+
 module.exports = {
-    testFunc: calculate
+    testFunc: calculate,
+    stackBased
 }

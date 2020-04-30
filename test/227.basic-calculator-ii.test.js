@@ -17,4 +17,7 @@ describe.each(
     it('case 5', () => {
         expect(testFunc('2-3+4')).toEqual(3)
     })
+    it('case 6', () => {
+        expect(testFunc('14-3/2')).toEqual(13)
+    })
 })
