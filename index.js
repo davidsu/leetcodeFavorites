@@ -107,6 +107,17 @@ if (!yargs.argv.h) {
 yargs // eslint-disable-line no-unused-expressions
     .command('$0', 'delegate to leetcode-cli', () => {}, () => cli.run())
     .command({
+        command: 'select <keyword>',
+        aliases: ['s'],
+        desc: 'prepare for solving problem <keyword>',
+        builder: yargs => yargs.positional('keyword', {
+            type: 'string',
+            default: '',
+            describe: 'Show question by name or id'
+        }),
+        handler: ({ keyword }) => core.getProblem(keyword, (_, p) => showAndGenerateProblem(p))
+    })
+    .command({
         command: 'random',
         aliases: ['r'],
         desc: 'select for you a random problem',
