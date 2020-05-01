@@ -92,8 +92,10 @@ function showAndGenerateProblem ({ id, slug }) {
     generateTestIfNeeded({ id, slug })
     addExportToSrc({ id, slug })
 }
+const printProblems = p => p.forEach((p, i) => console.log(`${i}. `, JSON.stringify(p)))
 async function getRandom () {
     const problems = await sortProblemByLike()
+    printProblems(problems)
     const idx = Math.floor(Math.random() * Math.min(300, problems.length))
     return problems[idx]
 }
@@ -120,7 +122,7 @@ yargs // eslint-disable-line no-unused-expressions
         command: 'list-by-like',
         aliases: ['l'],
         desc: 'list all problems sorted by like',
-        handler: () => sortProblemByLike().then(p => p.forEach((p, i) => console.log(`${i}. `, JSON.stringify(p))))
+        handler: () => sortProblemByLike().then(printProblems)
     })
     .option('e', {
         alias: 'easy',
