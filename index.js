@@ -15,18 +15,34 @@ function getAllProblems () {
         })
     })
 }
+
+function getDesiredDifficulty () {
+    if (yargs.argv.e) return 'Easy'
+    if (yargs.argv.m) return 'Medium'
+    if (yargs.argv.h) return 'Hard'
+}
+
+function shouldUseProblemByDifficultyLevel (problem) {
+    const level = getDesiredDifficulty()
+    if (level) {
+        return problem.level === level
+    }
+    return true
+}
+
 async function sortProblemByLike () {
     const problems = await getAllProblems()
     const mapper = ({ id }) => new Promise(resolve => {
         core.getProblem(id, (e, problem) => {
             if (e) return resolve() // probably locked problem, I don't care
-            const { likes, dislikes, link, id, slug } = problem
-            resolve({ likes, dislikes, link, id, slug })
+            const { likes, dislikes, link, id, slug, level } = problem
+            resolve({ likes, dislikes, link, id, slug, level })
         })
     })
     return (await Promise.allSettled(problems.map(mapper)))
         .filter(promise => !!promise.value)
         .map(promise => promise.value)
+        .filter(shouldUseProblemByDifficultyLevel)
         .sort((a, b) => b.likes - a.likes)
 }
 
@@ -78,7 +94,7 @@ function showAndGenerateProblem ({ id, slug }) {
 }
 async function getRandom () {
     const problems = await sortProblemByLike()
-    const idx = Math.floor(Math.random() * 300)
+    const idx = Math.floor(Math.random() * Math.min(300, problems.length))
     return problems[idx]
 }
 
@@ -104,7 +120,25 @@ yargs // eslint-disable-line no-unused-expressions
         command: 'list-by-like',
         aliases: ['l'],
         desc: 'list all problems sorted by like',
-        handler: () => sortProblemByLike().then(p => p.forEach(p => console.log(JSON.stringify(p))))
+        handler: () => sortProblemByLike().then(p => p.forEach((p, i) => console.log(`${i}. `, JSON.stringify(p))))
+    })
+    .option('e', {
+        alias: 'easy',
+        default: false,
+        describe: 'select only easy problems',
+        type: 'boolean'
+    })
+    .option('m', {
+        alias: 'medium',
+        default: false,
+        describe: 'select only medium problems',
+        type: 'boolean'
+    })
+    .option('h', {
+        alias: 'hard',
+        default: false,
+        describe: 'select only hard problems',
+        type: 'boolean'
     })
     .help('h')
     .alias('h', 'help')
