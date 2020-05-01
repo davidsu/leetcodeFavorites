@@ -72,9 +72,9 @@
  * @param {number} c
  * @return {number[][]}
  */
-Array.prototype.flat = function() {
+Array.prototype.flat = function () { // eslint-disable-line no-extend-native
     const result = []
-    for(const a of this) {
+    for (const a of this) {
         result.push(...a)
     }
     return result
