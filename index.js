@@ -88,6 +88,7 @@ function addExportToSrc ({ id, slug }) {
 
 function showAndGenerateProblem ({ id, slug }) {
     const command = `${path.resolve(__dirname, 'node_modules/.bin/leetcode')} show ${id} -xg -o ${__dirname}/src -l javascript`
+    console.log(command)
     cp.execSync(command, { stdio: [0, 1, 2] })
     generateTestIfNeeded({ id, slug })
     addExportToSrc({ id, slug })
@@ -115,7 +116,13 @@ yargs // eslint-disable-line no-unused-expressions
             default: '',
             describe: 'Show question by name or id'
         }),
-        handler: ({ keyword }) => core.getProblem(keyword, (_, p) => showAndGenerateProblem(p))
+        handler: ({ keyword }) => core.getProblem(keyword, (_, p) => {
+            if (Number(keyword) == keyword) { // eslint-disable-line eqeqeq
+                showAndGenerateProblem({ ...p, id: keyword })
+            } else {
+                showAndGenerateProblem(p)
+            }
+        })
     })
     .command({
         command: 'random',
