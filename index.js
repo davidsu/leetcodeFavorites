@@ -32,11 +32,11 @@ function shouldUseProblemByDifficultyLevel (problem) {
 
 async function sortProblemByLike () {
     const problems = await getAllProblems()
-    const mapper = ({ id }) => new Promise(resolve => {
-        core.getProblem(id, (e, problem) => {
+    const mapper = ({ fid }) => new Promise(resolve => {
+        core.getProblem(fid, (e, problem) => {
             if (e) return resolve() // probably locked problem, I don't care
-            const { likes, dislikes, link, id, slug, level } = problem
-            resolve({ likes, dislikes, link, id, slug, level })
+            const { likes, dislikes, link, id, fid, slug, level } = problem
+            resolve({ likes, dislikes, link, id, fid, slug, level })
         })
     })
     return (await Promise.allSettled(problems.map(mapper)))
@@ -51,7 +51,7 @@ function getProblemFromReviewList () {
         Plugin.plugins[2].getFavorites((_, { favorites }) => {
             const questions = favorites.private_favorites.find(f => f.name === 'Favorite').questions
             const problem = questions[Math.floor(Math.random() * questions.length)]
-            core.getProblem(problem.id, (e, problem) => {
+            core.getProblem(problem.fid, (e, problem) => {
                 console.log(JSON.stringify({ problem }))
                 resolve(problem)
             })
@@ -71,27 +71,27 @@ describe.each(
 })
 `
 
-const fileName = ({ id, slug }) => `${id}.${slug}`
+const fileName = ({ fid, slug }) => `${fid}.${slug}`
 
-function generateTestIfNeeded ({ id, slug }) {
-    const testName = fileName({ id, slug })
+function generateTestIfNeeded ({ fid, slug }) {
+    const testName = fileName({ fid, slug })
     const testFileName = `${__dirname}/test/${testName}.test.js`
     if (!fs.existsSync(testFileName)) {
         fs.writeFileSync(testFileName, testTemplate(testName))
     }
 }
 
-function addExportToSrc ({ id, slug }) {
-    const filePath = `${__dirname}/src/${fileName({ id, slug })}.js`
+function addExportToSrc ({ fid, slug }) {
+    const filePath = `${__dirname}/src/${fileName({ fid, slug })}.js`
     fs.appendFileSync(filePath, '\nmodule.exports = {\n\ttestFunc: null\n}')
 }
 
-function showAndGenerateProblem ({ id, slug }) {
-    const command = `${path.resolve(__dirname, 'node_modules/.bin/leetcode')} show ${id} -xg -o ${__dirname}/src -l javascript`
+function showAndGenerateProblem ({ fid, slug }) {
+    const command = `${path.resolve(__dirname, 'node_modules/.bin/leetcode')} show ${fid} -xg -o ${__dirname}/src -l javascript`
     console.log(command)
     cp.execSync(command, { stdio: [0, 1, 2] })
-    generateTestIfNeeded({ id, slug })
-    addExportToSrc({ id, slug })
+    generateTestIfNeeded({ fid, slug })
+    addExportToSrc({ fid, slug })
 }
 const printProblems = p => p.forEach((p, i) => console.log(`${i}. `, JSON.stringify(p)))
 async function getRandom () {
@@ -116,12 +116,9 @@ yargs // eslint-disable-line no-unused-expressions
             default: '',
             describe: 'Show question by name or id'
         }),
-        handler: ({ keyword }) => core.getProblem(keyword, (_, p) => {
-            if (Number(keyword) == keyword) { // eslint-disable-line eqeqeq
-                showAndGenerateProblem({ ...p, id: keyword })
-            } else {
-                showAndGenerateProblem(p)
-            }
+        handler: ({ keyword }) => core.getProblems((e, problems) => {
+            const p = problems.find(problem => problem.name === keyword || problem.fid === keyword)
+            showAndGenerateProblem(p)
         })
     })
     .command({
