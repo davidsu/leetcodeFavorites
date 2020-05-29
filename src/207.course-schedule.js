@@ -53,28 +53,22 @@
  * @param {number[][]} prerequisites
  * @return {boolean}
  */
-function canFinish (numCourses, prerequisites) {
-    const courses = new Array(numCourses).fill(false)
-    const graph = courses.map((_, course) => ({
-        next: [],
-        prerequisiteCount: 0
-    }))
-    for (const [course, prerequisite] of prerequisites) {
-        graph[prerequisite].next.push(course)
-        graph[course].prerequisiteCount++
+const canFinish = function (numCourses, prerequisites) {
+    const g = new Array(numCourses).fill(0).map(() => new Set())
+    for (const [course, needs] of prerequisites) {
+        g[course].add(needs)
     }
-    const completed = graph.map((courseMap, id) => courseMap.prerequisiteCount ? -1 : id).filter(id => id !== -1)
-    while (completed.length) {
-        const course = completed.pop()
-        courses[course] = true
-        graph[course].next.forEach(nextCourse => {
-            graph[nextCourse].prerequisiteCount--
-            if (!graph[nextCourse].prerequisiteCount) {
-                completed.push(nextCourse)
-            }
-        })
+    const dfs = course => {
+        if (!g[course].size) return true
+        if (g[course].visited) return false
+        g[course].visited = true
+        for (const needs of g[course]) {
+            if (!dfs(needs)) return false
+            g[course].delete(needs)
+        }
+        return true
     }
-    return courses.every(a => a)
+    return g.reduce((doable, _, course) => doable && dfs(course), true)
 }
 
 function betterPerformance (_, prerequisites) {
@@ -100,8 +94,7 @@ function betterPerformance (_, prerequisites) {
     }
     return !Object.keys(courses).length
 }
-
 module.exports = {
-    canFinish,
-    betterPerformance
+    betterPerformance,
+    canFinish
 }
