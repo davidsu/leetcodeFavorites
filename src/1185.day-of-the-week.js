@@ -54,18 +54,7 @@
  * @param {number} year
  * @return {string}
  */
-const dayOfTheWeek = function (day, month, year) {
-    const map = {
-        Sun: 'Sunday',
-        Mon: 'Monday',
-        Tue: 'Tuesday',
-        Wed: 'Wednesday',
-        Thu: 'Thursday',
-        Fri: 'Friday',
-        Sat: 'Saturday'
-    }
-    return new Date(year, month - 1, day).toString().replace(/(^\w{3}).*/, (str, g) => map[g])
-}
+const dayOfTheWeek = (day, month, year) => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date(year, month - 1, day).getDay()]
 
 module.exports = {
     dayOfTheWeek
