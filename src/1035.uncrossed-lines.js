@@ -74,35 +74,35 @@
  * @return {number}
  */
 const maxUncrossedLinesWithSpaceOptimization = function (A, B, aStart = 0, bStart = 0) {
-    const dp = new Array(B.length + 1).fill(0)
-    for (let i = 1; i <= A.length; i++) {
-        for (let j = 1, curr = 0, last = 0; j <= B.length; j++) {
-            [last, curr] = [curr, dp[j]]
-            if (A[i - 1] === B[j - 1]) {
-                dp[j] = 1 + last
-            } else {
-                dp[j] = Math.max(dp[j - 1], dp[j])
-            }
-        }
+  const dp = new Array(B.length + 1).fill(0);
+  for (let i = 1; i <= A.length; i++) {
+    for (let j = 1, curr = 0, last = 0; j <= B.length; j++) {
+      [last, curr] = [curr, dp[j]];
+      if (A[i - 1] === B[j - 1]) {
+        dp[j] = 1 + last;
+      } else {
+        dp[j] = Math.max(dp[j - 1], dp[j]);
+      }
     }
-    return dp[B.length]
-}
+  }
+  return dp[B.length];
+};
 
 const maxUncrossedLines = function (A, B, aStart = 0, bStart = 0) {
-    const matrix = new Array(A.length + 1).fill(0).map(() => new Array(B.length + 1).fill(0))
-    for (let i = 1; i <= A.length; i++) {
-        for (let j = 1; j <= B.length; j++) {
-            if (A[i - 1] === B[j - 1]) {
-                matrix[i][j] = matrix[i - 1][j - 1] + 1
-            } else {
-                matrix[i][j] = Math.max(matrix[i][j - 1], matrix[i - 1][j])
-            }
-        }
+  const matrix = new Array(A.length + 1).fill(0).map(() => new Array(B.length + 1).fill(0));
+  for (let i = 1; i <= A.length; i++) {
+    for (let j = 1; j <= B.length; j++) {
+      if (A[i - 1] === B[j - 1]) {
+        matrix[i][j] = matrix[i - 1][j - 1] + 1;
+      } else {
+        matrix[i][j] = Math.max(matrix[i][j - 1], matrix[i - 1][j]);
+      }
     }
-    return matrix[A.length][B.length]
-}
+  }
+  return matrix[A.length][B.length];
+};
 
 module.exports = {
-    maxUncrossedLines,
-    maxUncrossedLinesWithSpaceOptimization
-}
+  maxUncrossedLines,
+  maxUncrossedLinesWithSpaceOptimization
+};

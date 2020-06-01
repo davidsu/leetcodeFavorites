@@ -78,38 +78,39 @@
  * @param {number[][]} dislikes
  * @return {boolean}
  */
-const buildGraph = dislikes => dislikes.reduce((g, [a, b]) => {
-    g[a] = g[a] || new Set()
-    g[b] = g[b] || new Set()
-    g[a].add(b)
-    g[b].add(a)
-    return g
-}, {})
+const buildGraph = (dislikes) =>
+  dislikes.reduce((g, [a, b]) => {
+    g[a] = g[a] || new Set();
+    g[b] = g[b] || new Set();
+    g[a].add(b);
+    g[b].add(a);
+    return g;
+  }, {});
 
 const canBuildGroups = (visited, g, group, person, hated) => {
-    if (visited.has(person)) return true
-    visited.add(person)
-    if (!g[person]) return true
-    for (const dislikes of g[person]) {
-        if (group.has(dislikes)) return false
-        hated.add(dislikes)
-    }
-    for (const next of g[person]) {
-        if (!canBuildGroups(visited, g, hated, next, group)) return false
-    }
-    return true
-}
+  if (visited.has(person)) return true;
+  visited.add(person);
+  if (!g[person]) return true;
+  for (const dislikes of g[person]) {
+    if (group.has(dislikes)) return false;
+    hated.add(dislikes);
+  }
+  for (const next of g[person]) {
+    if (!canBuildGroups(visited, g, hated, next, group)) return false;
+  }
+  return true;
+};
 const possibleBipartition = function (N, dislikes) {
-    const g = buildGraph(dislikes)
-    const visited = new Set()
-    const g1 = new Set()
-    const g2 = new Set()
-    while (N > 0) {
-        if (!canBuildGroups(visited, g, g1, N--, g2)) return false
-    }
-    return true
-}
+  const g = buildGraph(dislikes);
+  const visited = new Set();
+  const g1 = new Set();
+  const g2 = new Set();
+  while (N > 0) {
+    if (!canBuildGroups(visited, g, g1, N--, g2)) return false;
+  }
+  return true;
+};
 
 module.exports = {
-    possibleBipartition
-}
+  possibleBipartition
+};

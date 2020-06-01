@@ -50,20 +50,20 @@
  * @param {function} isBadVersion()
  * @return {function}
  */
-const solution = isBadVersion => n => {
-    let low = 1
-    let high = n
-    while (low < high) {
-        const curr = Math.floor((high + low) / 2)
-        if (isBadVersion(curr)) {
-            high = curr
-        } else {
-            low = curr + 1
-        }
+const solution = (isBadVersion) => (n) => {
+  let low = 1;
+  let high = n;
+  while (low < high) {
+    const curr = Math.floor((high + low) / 2);
+    if (isBadVersion(curr)) {
+      high = curr;
+    } else {
+      low = curr + 1;
     }
-    return low
-}
+  }
+  return low;
+};
 
 module.exports = {
-    testFunc: solution
-}
+  testFunc: solution
+};

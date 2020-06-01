@@ -54,8 +54,9 @@
  * @param {number} year
  * @return {string}
  */
-const dayOfTheWeek = (day, month, year) => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date(year, month - 1, day).getDay()]
+const dayOfTheWeek = (day, month, year) =>
+  ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date(year, month - 1, day).getDay()];
 
 module.exports = {
-    dayOfTheWeek
-}
+  dayOfTheWeek
+};

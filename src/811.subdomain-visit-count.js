@@ -68,19 +68,19 @@
  * @param {string[]} cpdomains
  * @return {string[]}
  */
-const toFrequency = cpdomains =>
-    cpdomains.reduce((result, val) => {
-        let [num, domain] = val.split(' ')
-        while (domain) {
-            result[domain] = (result[domain] || 0) + Number(num)
-            domain = domain.replace(/^\w+\.?/, '')
-        }
-        return result
-    }, {})
+const toFrequency = (cpdomains) =>
+  cpdomains.reduce((result, val) => {
+    let [num, domain] = val.split(' ');
+    while (domain) {
+      result[domain] = (result[domain] || 0) + Number(num);
+      domain = domain.replace(/^\w+\.?/, '');
+    }
+    return result;
+  }, {});
 
-const frequencyToResult = freq => Object.entries(freq).map(([key, val]) => `${val} ${key}`)
+const frequencyToResult = (freq) => Object.entries(freq).map(([key, val]) => `${val} ${key}`);
 
-const subdomainVisits = cpdomains => frequencyToResult(toFrequency(cpdomains))
+const subdomainVisits = (cpdomains) => frequencyToResult(toFrequency(cpdomains));
 module.exports = {
-    subdomainVisits
-}
+  subdomainVisits
+};

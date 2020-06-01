@@ -34,14 +34,14 @@
  * @return {number}
  */
 const firstUniqChar = function (s) {
-    const sArr = s.split('')
-    const frequencies = sArr.reduce((acc, c) => {
-        acc[c] = (acc[c] || 0) + 1
-        return acc
-    }, {})
-    return sArr.findIndex(c => frequencies[c] === 1)
-}
+  const sArr = s.split('');
+  const frequencies = sArr.reduce((acc, c) => {
+    acc[c] = (acc[c] || 0) + 1;
+    return acc;
+  }, {});
+  return sArr.findIndex((c) => frequencies[c] === 1);
+};
 
 module.exports = {
-    firstUniqChar
-}
+  firstUniqChar
+};

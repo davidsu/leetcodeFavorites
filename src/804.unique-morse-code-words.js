@@ -56,11 +56,46 @@
  * @param {string[]} words
  * @return {number}
  */
-const letters = ['.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....', '..', '.---', '-.-', '.-..', '--', '-.', '---', '.--.', '--.-', '.-.', '...', '-', '..-', '...-', '.--', '-..-', '-.--', '--..']
-const a = 'a'.codePointAt(0)
-const getLetter = letter => letters[letter.codePointAt(0) - a]
-const uniqueMorseRepresentations = words => new Set(words.map(word => word.split('').map(letter => getLetter(letter)).join(''))).size
+const letters = [
+  '.-',
+  '-...',
+  '-.-.',
+  '-..',
+  '.',
+  '..-.',
+  '--.',
+  '....',
+  '..',
+  '.---',
+  '-.-',
+  '.-..',
+  '--',
+  '-.',
+  '---',
+  '.--.',
+  '--.-',
+  '.-.',
+  '...',
+  '-',
+  '..-',
+  '...-',
+  '.--',
+  '-..-',
+  '-.--',
+  '--..'
+];
+const a = 'a'.codePointAt(0);
+const getLetter = (letter) => letters[letter.codePointAt(0) - a];
+const uniqueMorseRepresentations = (words) =>
+  new Set(
+    words.map((word) =>
+      word
+        .split('')
+        .map((letter) => getLetter(letter))
+        .join('')
+    )
+  ).size;
 
 module.exports = {
-    uniqueMorseRepresentations
-}
+  uniqueMorseRepresentations
+};

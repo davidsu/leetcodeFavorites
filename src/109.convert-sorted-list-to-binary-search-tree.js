@@ -55,21 +55,21 @@
 
 // elegant solution here
 // https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/discuss/502147/Easy-to-understand-Javascript-solution
-const toArray = head => head ? [head.val, ...toArray(head.next)] : []
-function withAuxiliaryArray (head) {
-    const arr = toArray(head)
-    function arrayToBst (start, end) {
-        if (start > end) return null
-        const idx = parseInt((start + end) / 2)
-        return {
-            val: arr[idx],
-            left: arrayToBst(start, idx - 1),
-            right: arrayToBst(idx + 1, end)
-        }
-    }
-    return arrayToBst(0, arr.length - 1)
-};
+const toArray = (head) => (head ? [head.val, ...toArray(head.next)] : []);
+function withAuxiliaryArray(head) {
+  const arr = toArray(head);
+  function arrayToBst(start, end) {
+    if (start > end) return null;
+    const idx = parseInt((start + end) / 2);
+    return {
+      val: arr[idx],
+      left: arrayToBst(start, idx - 1),
+      right: arrayToBst(idx + 1, end)
+    };
+  }
+  return arrayToBst(0, arr.length - 1);
+}
 
 module.exports = {
-    withAuxiliaryArray
-}
+  withAuxiliaryArray
+};

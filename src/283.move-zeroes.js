@@ -32,17 +32,17 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 const moveZeroes = function (nums) {
-    let slow = 0
-    let fast = 0
-    while (fast < nums.length) {
-        if (nums[fast] === 0) {
-            fast++
-        } else {
-            nums[slow++] = nums[fast++]
-        }
+  let slow = 0;
+  let fast = 0;
+  while (fast < nums.length) {
+    if (nums[fast] === 0) {
+      fast++;
+    } else {
+      nums[slow++] = nums[fast++];
     }
-    while (slow < nums.length) {
-        nums[slow++] = 0
-    }
-}
-module.exports = { moveZeroes }
+  }
+  while (slow < nums.length) {
+    nums[slow++] = 0;
+  }
+};
+module.exports = { moveZeroes };

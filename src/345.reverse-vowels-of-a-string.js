@@ -39,24 +39,30 @@
  * @param {string} s
  * @return {string}
  */
-function reverseVowels (s = '') {
-    const working = s.split('')
-    let low = -1; let high = s.length
-    const swap = (i, j) => { [working[i], working[j]] = [working[j], working[i]] }
-    while (++low < --high) {
-        while (!/[aeiou]/i.test(working[low]) && low < high) low++
-        while (!/[aeiou]/i.test(working[high]) && high > low) high--
-        swap(high, low)
-    }
-    return working.join('')
-};
-
-function functionalReverseVowels (s) {
-    const regex = /[aeiou]/i
-    const vowels = s.split('').filter(c => regex.test(c))
-    return s.split('').map(c => regex.test(c) ? vowels.pop() : c).join('')
-};
-module.exports = {
-    reverseVowels,
-    functionalReverseVowels
+function reverseVowels(s = '') {
+  const working = s.split('');
+  let low = -1;
+  let high = s.length;
+  const swap = (i, j) => {
+    [working[i], working[j]] = [working[j], working[i]];
+  };
+  while (++low < --high) {
+    while (!/[aeiou]/i.test(working[low]) && low < high) low++;
+    while (!/[aeiou]/i.test(working[high]) && high > low) high--;
+    swap(high, low);
+  }
+  return working.join('');
 }
+
+function functionalReverseVowels(s) {
+  const regex = /[aeiou]/i;
+  const vowels = s.split('').filter((c) => regex.test(c));
+  return s
+    .split('')
+    .map((c) => (regex.test(c) ? vowels.pop() : c))
+    .join('');
+}
+module.exports = {
+  reverseVowels,
+  functionalReverseVowels
+};

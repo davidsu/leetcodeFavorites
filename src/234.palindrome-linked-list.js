@@ -41,26 +41,27 @@
  * @return {boolean}
  */
 const reverse = (head, prev = null) => {
-    const next = head.next
-    head.next = prev
-    return next ? reverse(next, head) : head
-}
+  const next = head.next;
+  head.next = prev;
+  return next ? reverse(next, head) : head;
+};
 const isPalindrome = function (head) {
-    if (!head || !head.next) return true
-    let slow = head; let fast = head.next
-    while (fast && fast.next) {
-        slow = slow.next
-        fast = fast.next.next
-    }
-    slow.next = reverse(slow.next)
-    slow = slow.next
-    while (slow && head.val === slow.val) {
-        slow = slow.next
-        head = head.next
-    }
-    return !slow
-}
+  if (!head || !head.next) return true;
+  let slow = head;
+  let fast = head.next;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  slow.next = reverse(slow.next);
+  slow = slow.next;
+  while (slow && head.val === slow.val) {
+    slow = slow.next;
+    head = head.next;
+  }
+  return !slow;
+};
 
 module.exports = {
-    isPalindrome
-}
+  isPalindrome
+};

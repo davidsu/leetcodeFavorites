@@ -32,35 +32,32 @@
  * @param {character[][]} matrix
  * @return {number}
  */
-const indexes = arr => arr.map((_, idx) => idx)
+const indexes = (arr) => arr.map((_, idx) => idx);
 
-function maximalRectangle (matrix) {
-    const expandRight = (row, col, max) =>
-        matrix[row][col] === '1' && col <= max
-            ? expandRight(row, col + 1, max) || col
-            : col - 1
+function maximalRectangle(matrix) {
+  const expandRight = (row, col, max) => (matrix[row][col] === '1' && col <= max ? expandRight(row, col + 1, max) || col : col - 1);
 
-    const expand = ([startRow, startCol], row = startRow, col = startCol, max = matrix[0].length - 1) => {
-        if (matrix[row] && matrix[row][col] === '1') {
-            const nextCol = expandRight(row, col, max)
-            const count = (row - startRow + 1) * (nextCol - startCol + 1)
-            return Math.max(count, expand([startRow, startCol], row + 1, col, nextCol))
-        }
-        return 0
+  const expand = ([startRow, startCol], row = startRow, col = startCol, max = matrix[0].length - 1) => {
+    if (matrix[row] && matrix[row][col] === '1') {
+      const nextCol = expandRight(row, col, max);
+      const count = (row - startRow + 1) * (nextCol - startCol + 1);
+      return Math.max(count, expand([startRow, startCol], row + 1, col, nextCol));
     }
+    return 0;
+  };
 
-    function * allBests () {
-        for (const row of indexes(matrix)) {
-            for (const col of indexes(matrix[row])) {
-                yield expand([row, col])
-            }
-        }
-        yield 0
+  function* allBests() {
+    for (const row of indexes(matrix)) {
+      for (const col of indexes(matrix[row])) {
+        yield expand([row, col]);
+      }
     }
+    yield 0;
+  }
 
-    return Math.max(...Array.from(allBests()))
+  return Math.max(...Array.from(allBests()));
 }
 
 module.exports = {
-    maximalRectangle
-}
+  maximalRectangle
+};

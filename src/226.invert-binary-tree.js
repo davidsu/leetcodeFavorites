@@ -52,15 +52,15 @@
  * @param {TreeNode} root
  * @return {TreeNode}
  */
-const invertTree = root => {
-    if (root) {
-        [root.left, root.right] = [root.right, root.left]
-        invertTree(root.right)
-        invertTree(root.left)
-    }
-    return root
-}
+const invertTree = (root) => {
+  if (root) {
+    [root.left, root.right] = [root.right, root.left];
+    invertTree(root.right);
+    invertTree(root.left);
+  }
+  return root;
+};
 
 module.exports = {
-    invertTree
-}
+  invertTree
+};

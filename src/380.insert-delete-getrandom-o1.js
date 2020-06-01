@@ -53,63 +53,63 @@
 *
 */
 /**
-* Initialize your data structure here.
-*/
+ * Initialize your data structure here.
+ */
 const RandomizedSet = function () {
-    const map = new Map()
-    const values = []
-    function swap (idx) {
-        const lastIdx = values.length - 1
-        if (idx === lastIdx) return
-        const last = values[lastIdx]
-        values[lastIdx] = values[idx]
-        map.set(last, idx)
-        values[idx] = last
-    }
-    /**
-* Inserts a value to the set. Returns true if the set did not already contain the specified element.
-* @param {number} val
-* @return {boolean}
-*/
-    function insert (val) {
-        if (map.has(val)) return false
-        values.push(val)
-        map.set(val, values.length - 1)
-        return true
-    };
+  const map = new Map();
+  const values = [];
+  function swap(idx) {
+    const lastIdx = values.length - 1;
+    if (idx === lastIdx) return;
+    const last = values[lastIdx];
+    values[lastIdx] = values[idx];
+    map.set(last, idx);
+    values[idx] = last;
+  }
+  /**
+   * Inserts a value to the set. Returns true if the set did not already contain the specified element.
+   * @param {number} val
+   * @return {boolean}
+   */
+  function insert(val) {
+    if (map.has(val)) return false;
+    values.push(val);
+    map.set(val, values.length - 1);
+    return true;
+  }
 
-    /**
-* Removes a value from the set. Returns true if the set contained the specified element.
-* @param {number} val
-* @return {boolean}
-*/
-    function remove (val) {
-        if (!map.has(val)) return false
-        const idx = map.get(val)
-        swap(idx)
-        values.pop()
-        map.delete(val)
-        return true
-    };
+  /**
+   * Removes a value from the set. Returns true if the set contained the specified element.
+   * @param {number} val
+   * @return {boolean}
+   */
+  function remove(val) {
+    if (!map.has(val)) return false;
+    const idx = map.get(val);
+    swap(idx);
+    values.pop();
+    map.delete(val);
+    return true;
+  }
 
-    /**
-* Get a random element from the set.
-* @return {number}
-*/
-    function getRandom () {
-        return values[parseInt(Math.random() * (values.length))]
-    };
-    return { insert, remove, getRandom }
-}
+  /**
+   * Get a random element from the set.
+   * @return {number}
+   */
+  function getRandom() {
+    return values[parseInt(Math.random() * values.length)];
+  }
+  return { insert, remove, getRandom };
+};
 
 /**
-* Your RandomizedSet object will be instantiated and called as such:
-* var obj = new RandomizedSet()
-* var param_1 = obj.insert(val)
-* var param_2 = obj.remove(val)
-* var param_3 = obj.getRandom()
-*/
+ * Your RandomizedSet object will be instantiated and called as such:
+ * var obj = new RandomizedSet()
+ * var param_1 = obj.insert(val)
+ * var param_2 = obj.remove(val)
+ * var param_3 = obj.getRandom()
+ */
 
 module.exports = {
-    RandomizedSet
-}
+  RandomizedSet
+};

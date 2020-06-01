@@ -40,11 +40,11 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-function preorderTraversal (root) {
-    if (!root) return []
-    return [root.val, ...preorderTraversal(root.left), ...preorderTraversal(root.right)]
-};
+function preorderTraversal(root) {
+  if (!root) return [];
+  return [root.val, ...preorderTraversal(root.left), ...preorderTraversal(root.right)];
+}
 
 module.exports = {
-    testFunc: preorderTraversal
-}
+  testFunc: preorderTraversal
+};

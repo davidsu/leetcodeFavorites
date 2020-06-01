@@ -70,39 +70,39 @@
  * @param {string[]} wordList
  * @return {number}
  */
-const aToZ = new Array(26).fill(0).map((_, idx) => String.fromCharCode('a'.charCodeAt(0) + idx))
+const aToZ = new Array(26).fill(0).map((_, idx) => String.fromCharCode('a'.charCodeAt(0) + idx));
 
-function * generateAllDistanceOneWords (word) {
-    const wordArr = word.split('')
-    for (const [idx, char] of Object.entries(wordArr)) {
-        for (const replaceChar of aToZ) {
-            if (char !== replaceChar) {
-                wordArr[idx] = replaceChar
-                yield wordArr.join('')
-            }
-        }
-        wordArr[idx] = char
+function* generateAllDistanceOneWords(word) {
+  const wordArr = word.split('');
+  for (const [idx, char] of Object.entries(wordArr)) {
+    for (const replaceChar of aToZ) {
+      if (char !== replaceChar) {
+        wordArr[idx] = replaceChar;
+        yield wordArr.join('');
+      }
     }
+    wordArr[idx] = char;
+  }
 }
 
-function ladderLength (beginWord, endWord, wordList) {
-    if (beginWord === endWord) return 0
-    const next = [[beginWord, 1]]
-    let idx = 0
-    const unseen = new Set(wordList)
-    while (idx < next.length) {
-        const [curr, distance] = next[idx++]
-        if (curr === endWord) return distance
-        Array.from(generateAllDistanceOneWords(curr))
-            .filter(candidate => unseen.has(candidate))
-            .forEach(nextStep => {
-                unseen.delete(nextStep)
-                next.push([nextStep, distance + 1])
-            })
-    }
-    return 0
+function ladderLength(beginWord, endWord, wordList) {
+  if (beginWord === endWord) return 0;
+  const next = [[beginWord, 1]];
+  let idx = 0;
+  const unseen = new Set(wordList);
+  while (idx < next.length) {
+    const [curr, distance] = next[idx++];
+    if (curr === endWord) return distance;
+    Array.from(generateAllDistanceOneWords(curr))
+      .filter((candidate) => unseen.has(candidate))
+      .forEach((nextStep) => {
+        unseen.delete(nextStep);
+        next.push([nextStep, distance + 1]);
+      });
+  }
+  return 0;
 }
 
 module.exports = {
-    testFunc: ladderLength
-}
+  testFunc: ladderLength
+};

@@ -33,35 +33,36 @@
  * @param {number[]} nums
  * @return {number[]}
  */
-const count = (arr, num) => arr.reduce((result, value) => value === num ? result + 1 : result, 0)
-const counter = (num = 0, count = 0) => ({ num, count })
-function majorityElement (nums) {
-    let count1 = counter(); let count2 = counter()
-    for (const num of nums) {
-        if (num === count1.num) {
-            count1.count++
-        } else if (num === count2.num) {
-            count2.count++
-        } else if (!count1.count) {
-            count1 = counter(num, 1)
-        } else if (!count2.count) {
-            count2 = counter(num, 1)
-        } else {
-            count1.count--
-            count2.count--
-        }
+const count = (arr, num) => arr.reduce((result, value) => (value === num ? result + 1 : result), 0);
+const counter = (num = 0, count = 0) => ({ num, count });
+function majorityElement(nums) {
+  let count1 = counter();
+  let count2 = counter();
+  for (const num of nums) {
+    if (num === count1.num) {
+      count1.count++;
+    } else if (num === count2.num) {
+      count2.count++;
+    } else if (!count1.count) {
+      count1 = counter(num, 1);
+    } else if (!count2.count) {
+      count2 = counter(num, 1);
+    } else {
+      count1.count--;
+      count2.count--;
     }
-    const result = []
-    const threshold = nums.length / 3
-    if (count(nums, count1.num) > threshold) {
-        result.push(count1.num)
-    }
-    if (count(nums, count2.num) > threshold && count2.num !== count1.num) {
-        result.push(count2.num)
-    }
-    return result
+  }
+  const result = [];
+  const threshold = nums.length / 3;
+  if (count(nums, count1.num) > threshold) {
+    result.push(count1.num);
+  }
+  if (count(nums, count2.num) > threshold && count2.num !== count1.num) {
+    result.push(count2.num);
+  }
+  return result;
 }
 
 module.exports = {
-    testFunc: majorityElement
-}
+  testFunc: majorityElement
+};

@@ -64,11 +64,15 @@
  * @param {number[]} nums
  * @return {number}
  */
-const minStartValue = nums => -nums.reduce(({ sum, min }, val) => ({
-    sum: val + sum,
-    min: Math.min(min, val + sum)
-}), { sum: 0, min: 0 }).min + 1
+const minStartValue = (nums) =>
+  -nums.reduce(
+    ({ sum, min }, val) => ({
+      sum: val + sum,
+      min: Math.min(min, val + sum)
+    }),
+    { sum: 0, min: 0 }
+  ).min + 1;
 
 module.exports = {
-    minStartValue
-}
+  minStartValue
+};

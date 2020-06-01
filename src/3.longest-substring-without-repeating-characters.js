@@ -51,20 +51,22 @@
  * @param {string} s
  * @return {number}
  */
-function lengthOfLongestSubstring (s = '') {
-    if (s.length < 2) return s.length
-    const { best } = s.split('')
-        .reduce((calc, char, idx) => {
-            if (calc[char] >= calc.start) {
-                calc.start = calc[char]
-            }
-            calc.best = Math.max(calc.best, idx - calc.start)
-            calc[char] = idx
-            return calc
-        }, { best: 0, start: -1 })
-    return best
-};
+function lengthOfLongestSubstring(s = '') {
+  if (s.length < 2) return s.length;
+  const { best } = s.split('').reduce(
+    (calc, char, idx) => {
+      if (calc[char] >= calc.start) {
+        calc.start = calc[char];
+      }
+      calc.best = Math.max(calc.best, idx - calc.start);
+      calc[char] = idx;
+      return calc;
+    },
+    { best: 0, start: -1 }
+  );
+  return best;
+}
 
 module.exports = {
-    lengthOfLongestSubstring
-}
+  lengthOfLongestSubstring
+};

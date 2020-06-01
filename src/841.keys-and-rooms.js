@@ -63,21 +63,21 @@
  * @return {boolean}
  */
 const canVisitAllRooms = function (rooms) {
-    const canVisit = new Set()
-    const nextVisitSet = new Set()
-    const visitQueue = [0]
-    while (visitQueue.length) {
-        const current = visitQueue.pop()
-        nextVisitSet.delete(current)
-        canVisit.add(current)
-        for (const next of rooms[current]) {
-            if (!canVisit.has(next) && !nextVisitSet.has(next)) {
-                visitQueue.push(next)
-                nextVisitSet.add(next)
-            }
-        }
+  const canVisit = new Set();
+  const nextVisitSet = new Set();
+  const visitQueue = [0];
+  while (visitQueue.length) {
+    const current = visitQueue.pop();
+    nextVisitSet.delete(current);
+    canVisit.add(current);
+    for (const next of rooms[current]) {
+      if (!canVisit.has(next) && !nextVisitSet.has(next)) {
+        visitQueue.push(next);
+        nextVisitSet.add(next);
+      }
     }
-    return canVisit.size === rooms.length
-}
+  }
+  return canVisit.size === rooms.length;
+};
 
-module.exports = { canVisitAllRooms }
+module.exports = { canVisitAllRooms };

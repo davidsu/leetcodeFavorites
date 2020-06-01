@@ -63,19 +63,20 @@
  * @return {number}
  */
 const countSquares = function (matrix) {
-    let result = 0
-    const get = (i, j) => (matrix[i] && matrix[i][j]) || 0
-    for (const i in matrix) {
-        for (const j in matrix[i]) {
-            if (matrix[i][j] === 1) { // eslint-disable-line eqeqeq
-                matrix[i][j] += Math.min(get(i - 1, j), get(i, j - 1), get(i - 1, j - 1))
-            }
-            result += matrix[i][j]
-        }
+  let result = 0;
+  const get = (i, j) => (matrix[i] && matrix[i][j]) || 0;
+  for (const i in matrix) {
+    for (const j in matrix[i]) {
+      if (matrix[i][j] === 1) {
+        // eslint-disable-line eqeqeq
+        matrix[i][j] += Math.min(get(i - 1, j), get(i, j - 1), get(i - 1, j - 1));
+      }
+      result += matrix[i][j];
     }
-    return result
-}
+  }
+  return result;
+};
 
 module.exports = {
-    countSquares
-}
+  countSquares
+};

@@ -36,27 +36,27 @@
  * @param {number[]} nums
  * @return {number}
  */
-function jump (nums) {
-    let jumps = 0
-    let nextIdx = 0
-    while (nextIdx < nums.length - 1) {
-        jumps++
-        const idx = nextIdx
-        if (idx + nums[idx] >= nums.length - 1) {
-            break
-        }
-        let bestNext = idx
-        for (let jumpSize = nums[idx]; jumpSize > 0; jumpSize--) {
-            const jumpStart = idx + jumpSize
-            if (nums[jumpStart] + jumpStart > bestNext) {
-                nextIdx = jumpStart
-                bestNext = nums[jumpStart] + jumpStart
-            }
-        }
+function jump(nums) {
+  let jumps = 0;
+  let nextIdx = 0;
+  while (nextIdx < nums.length - 1) {
+    jumps++;
+    const idx = nextIdx;
+    if (idx + nums[idx] >= nums.length - 1) {
+      break;
     }
-    return jumps
-};
+    let bestNext = idx;
+    for (let jumpSize = nums[idx]; jumpSize > 0; jumpSize--) {
+      const jumpStart = idx + jumpSize;
+      if (nums[jumpStart] + jumpStart > bestNext) {
+        nextIdx = jumpStart;
+        bestNext = nums[jumpStart] + jumpStart;
+      }
+    }
+  }
+  return jumps;
+}
 
 module.exports = {
-    jump
-}
+  jump
+};

@@ -68,29 +68,29 @@
  * @param {Node} root
  * @return {Node}
  */
-function connect (root) {
-    let nextRoot = {}
-    let needle = nextRoot
-    const head = root
-    while (root) {
-        if (root.left) {
-            needle.next = root.left
-            needle = needle.next
-        }
-        if (root.right) {
-            needle.next = root.right
-            needle = needle.next
-        }
-        root = root.next
-        if (!root) {
-            root = nextRoot.next
-            nextRoot = {}
-            needle = nextRoot
-        }
+function connect(root) {
+  let nextRoot = {};
+  let needle = nextRoot;
+  const head = root;
+  while (root) {
+    if (root.left) {
+      needle.next = root.left;
+      needle = needle.next;
     }
-    return head
+    if (root.right) {
+      needle.next = root.right;
+      needle = needle.next;
+    }
+    root = root.next;
+    if (!root) {
+      root = nextRoot.next;
+      nextRoot = {};
+      needle = nextRoot;
+    }
+  }
+  return head;
 }
 
 module.exports = {
-    connect
-}
+  connect
+};

@@ -87,23 +87,23 @@
  * @return {boolean}
  */
 const isMatch = function (s, p) {
-    const seen = new Set()
-    const matchChar = (idxS, idxP) => s[idxS] === p[idxP] && matches(idxS + 1, idxP + 1)
-    const matchSingle = (idxS, idxP) => p[idxP] === '?' && matches(idxS + 1, idxP + 1)
-    const matchStar = (idxS, idxP) => p[idxP] === '*' && (matches(idxS + 1, idxP) || matches(idxS + 1, idxP + 1) || matches(idxS, idxP + 1))
-    const matches = (idxS, idxP) => {
-        const key = `${idxS},${idxP}`
-        if (seen.has(key)) return false
-        seen.add(key)
-        if (idxS === s.length && idxP === p.length) return true
-        if (idxP === p.length) return false
-        if (idxS === s.length && p[idxP] !== '*') return false
-        if (idxS > s.length) return false
-        return matchChar(idxS, idxP) || matchSingle(idxS, idxP) || matchStar(idxS, idxP)
-    }
-    return matches(0, 0)
-}
+  const seen = new Set();
+  const matchChar = (idxS, idxP) => s[idxS] === p[idxP] && matches(idxS + 1, idxP + 1);
+  const matchSingle = (idxS, idxP) => p[idxP] === '?' && matches(idxS + 1, idxP + 1);
+  const matchStar = (idxS, idxP) => p[idxP] === '*' && (matches(idxS + 1, idxP) || matches(idxS + 1, idxP + 1) || matches(idxS, idxP + 1));
+  const matches = (idxS, idxP) => {
+    const key = `${idxS},${idxP}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    if (idxS === s.length && idxP === p.length) return true;
+    if (idxP === p.length) return false;
+    if (idxS === s.length && p[idxP] !== '*') return false;
+    if (idxS > s.length) return false;
+    return matchChar(idxS, idxP) || matchSingle(idxS, idxP) || matchStar(idxS, idxP);
+  };
+  return matches(0, 0);
+};
 
 module.exports = {
-    isMatch
-}
+  isMatch
+};

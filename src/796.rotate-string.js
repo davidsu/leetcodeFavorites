@@ -40,8 +40,8 @@
  * @param {string} B
  * @return {boolean}
  */
-const rotateString = (A, B) => A.length === B.length && (A + A).indexOf(B) !== -1
+const rotateString = (A, B) => A.length === B.length && (A + A).indexOf(B) !== -1;
 
 module.exports = {
-    rotateString
-}
+  rotateString
+};

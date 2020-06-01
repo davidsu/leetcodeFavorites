@@ -70,18 +70,18 @@
  * @return {number[]}
  */
 const distributeCandies = function (candies, numPeople) {
-    const result = new Array(numPeople).fill(0)
-    let next = 1
-    let idx = 0
-    while (candies > 0) {
-        result[idx] += Math.min(candies, next)
-        idx = (idx + 1) % numPeople
-        candies = candies - next
-        next++
-    }
-    return result
-}
+  const result = new Array(numPeople).fill(0);
+  let next = 1;
+  let idx = 0;
+  while (candies > 0) {
+    result[idx] += Math.min(candies, next);
+    idx = (idx + 1) % numPeople;
+    candies = candies - next;
+    next++;
+  }
+  return result;
+};
 
 module.exports = {
-    distributeCandies
-}
+  distributeCandies
+};

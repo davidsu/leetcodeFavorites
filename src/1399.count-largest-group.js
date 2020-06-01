@@ -62,20 +62,20 @@
  * @param {number} n
  * @return {number}
  */
-const getSum = num => num === 0 ? 0 : (num % 10) + getSum(Math.floor(num / 10))
-const reducer = max => (total, sum) => total + (sum === max)
+const getSum = (num) => (num === 0 ? 0 : (num % 10) + getSum(Math.floor(num / 10)));
+const reducer = (max) => (total, sum) => total + (sum === max);
 
-const countLargestGroup = n => {
-    const results = []
+const countLargestGroup = (n) => {
+  const results = [];
 
-    while (n > 0) {
-        const sum = getSum(n--) - 1
-        results[sum] = (results[sum] || 0) + 1
-    }
+  while (n > 0) {
+    const sum = getSum(n--) - 1;
+    results[sum] = (results[sum] || 0) + 1;
+  }
 
-    return results.reduce(reducer(Math.max(...results)), 0)
-}
+  return results.reduce(reducer(Math.max(...results)), 0);
+};
 
 module.exports = {
-    countLargestGroup
-}
+  countLargestGroup
+};

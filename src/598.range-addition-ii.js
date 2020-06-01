@@ -60,12 +60,11 @@
  * @param {number[][]} ops
  * @return {number}
  */
-const maxCount = (m, n, ops) => ops
-    .reduce(([maxx, maxy], [x, y]) => [Math.min(maxx, x), Math.min(maxy, y)], [m, n])
-    .reduce((res, val) => res * val, 1)
+const maxCount = (m, n, ops) =>
+  ops.reduce(([maxx, maxy], [x, y]) => [Math.min(maxx, x), Math.min(maxy, y)], [m, n]).reduce((res, val) => res * val, 1);
 
-const maxCount2 = (m, n, ops) => Math.min(...ops.map(e => e[0]), m) * Math.min(...ops.map(e => e[1]), n)
+const maxCount2 = (m, n, ops) => Math.min(...ops.map((e) => e[0]), m) * Math.min(...ops.map((e) => e[1]), n);
 module.exports = {
-    testFunc: maxCount,
-    maxCount2
-}
+  testFunc: maxCount,
+  maxCount2
+};

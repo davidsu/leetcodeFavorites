@@ -52,17 +52,17 @@
  * @param {number} sum
  * @return {number[][]}
  */
-function pathSum (root, sum) {
-    if (!root) return []
-    if (sum === root.val && !root.right && !root.left) {
-        return [[root.val]]
-    }
-    return pathSum(root.left, sum - root.val)
-        .concat(pathSum(root.right, sum - root.val))
-        .filter(a => a.length)
-        .reduce((acc, arr) => acc.push([root.val, ...arr]) && acc, [])
-};
+function pathSum(root, sum) {
+  if (!root) return [];
+  if (sum === root.val && !root.right && !root.left) {
+    return [[root.val]];
+  }
+  return pathSum(root.left, sum - root.val)
+    .concat(pathSum(root.right, sum - root.val))
+    .filter((a) => a.length)
+    .reduce((acc, arr) => acc.push([root.val, ...arr]) && acc, []);
+}
 
 module.exports = {
-    testFunc: pathSum
-}
+  testFunc: pathSum
+};

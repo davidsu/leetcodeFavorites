@@ -46,53 +46,53 @@
  * @param {string} s
  * @return {number}
  */
-function pop (stack) {
-    let result = 0
-    while (stack.length) {
-        const n = stack.pop()
-        if (n === '(') return result
-        result += n
-    }
-    return result
+function pop(stack) {
+  let result = 0;
+  while (stack.length) {
+    const n = stack.pop();
+    if (n === '(') return result;
+    result += n;
+  }
+  return result;
 }
 const getResult = (s, i) => {
-    const stack = []
-    const isNum = /\d/
-    let sign
-    let num
-    const reset = () => {
-        sign = 1
-        num = 0
+  const stack = [];
+  const isNum = /\d/;
+  let sign;
+  let num;
+  const reset = () => {
+    sign = 1;
+    num = 0;
+  };
+  reset();
+  while (i < s.length) {
+    const c = s[i];
+    if (c === '(') {
+      const { result, i: j } = getResult(s, i + 1);
+      stack.push(result * sign);
+      i = j;
+      reset();
+    } else if (isNum.test(c)) {
+      num = num * 10 + Number(c);
+    } else {
+      stack.push(num * sign);
+      reset();
+      if (c === '-') {
+        sign = -1;
+      } else if (c === ')') {
+        return { result: pop(stack), i };
+      }
     }
-    reset()
-    while (i < s.length) {
-        const c = s[i]
-        if (c === '(') {
-            const { result, i: j } = getResult(s, i + 1)
-            stack.push(result * sign)
-            i = j
-            reset()
-        } else if (isNum.test(c)) {
-            num = num * 10 + Number(c)
-        } else {
-            stack.push(num * sign)
-            reset()
-            if (c === '-') {
-                sign = -1
-            } else if (c === ')') {
-                return { result: pop(stack), i }
-            }
-        }
-        i++
-    }
-    stack.push(num * sign)
-    return pop(stack)
-}
+    i++;
+  }
+  stack.push(num * sign);
+  return pop(stack);
+};
 const calculate = function (s) {
-    const work = s.replace(/\s+/g, '')
-    return getResult(work, 0)
-}
+  const work = s.replace(/\s+/g, '');
+  return getResult(work, 0);
+};
 
 module.exports = {
-    calculate
-}
+  calculate
+};

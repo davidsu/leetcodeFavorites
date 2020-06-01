@@ -41,23 +41,23 @@
  * @param {number[]} newInterval
  * @return {number[][]}
  */
-function insert (intervals, newInterval) {
-    const shouldBeLast = !intervals.length || intervals[intervals.length - 1][1] < newInterval[0]
-    if (shouldBeLast) return [...intervals, newInterval]
-    const shouldBeFirst = intervals[0][0] > newInterval[1]
-    if (shouldBeFirst) return [newInterval, ...intervals]
-    let idx = 0
-    while (newInterval[0] > intervals[idx][1]) idx++
-    let end = idx
-    while (end < intervals.length && intervals[end][0] <= newInterval[1]) {
-        newInterval[0] = Math.min(intervals[end][0], newInterval[0])
-        newInterval[1] = Math.max(intervals[end][1], newInterval[1])
-        end++
-    }
-    intervals.splice(idx, end - idx, newInterval)
-    return intervals
+function insert(intervals, newInterval) {
+  const shouldBeLast = !intervals.length || intervals[intervals.length - 1][1] < newInterval[0];
+  if (shouldBeLast) return [...intervals, newInterval];
+  const shouldBeFirst = intervals[0][0] > newInterval[1];
+  if (shouldBeFirst) return [newInterval, ...intervals];
+  let idx = 0;
+  while (newInterval[0] > intervals[idx][1]) idx++;
+  let end = idx;
+  while (end < intervals.length && intervals[end][0] <= newInterval[1]) {
+    newInterval[0] = Math.min(intervals[end][0], newInterval[0]);
+    newInterval[1] = Math.max(intervals[end][1], newInterval[1]);
+    end++;
+  }
+  intervals.splice(idx, end - idx, newInterval);
+  return intervals;
 }
 
 module.exports = {
-    insert
-}
+  insert
+};

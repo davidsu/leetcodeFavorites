@@ -58,22 +58,22 @@
  * @return {number[][]}
  */
 const intervalIntersection = function (A, B) {
-    const result = []
-    let i = 0
-    let j = 0
-    while (i < A.length && j < B.length) {
-        const [alow, ahigh] = A[i]
-        const [blow, bhigh] = B[j]
-        result.push([Math.max(alow, blow), Math.min(ahigh, bhigh)])
-        if (bhigh < ahigh) {
-            j++
-        } else {
-            i++
-        }
+  const result = [];
+  let i = 0;
+  let j = 0;
+  while (i < A.length && j < B.length) {
+    const [alow, ahigh] = A[i];
+    const [blow, bhigh] = B[j];
+    result.push([Math.max(alow, blow), Math.min(ahigh, bhigh)]);
+    if (bhigh < ahigh) {
+      j++;
+    } else {
+      i++;
     }
-    return result.filter(([a, b]) => a <= b)
-}
+  }
+  return result.filter(([a, b]) => a <= b);
+};
 
 module.exports = {
-    intervalIntersection
-}
+  intervalIntersection
+};

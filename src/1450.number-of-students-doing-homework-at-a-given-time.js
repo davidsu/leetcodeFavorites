@@ -83,8 +83,9 @@
  * @param {number} queryTime
  * @return {number}
  */
-const busyStudent = (startTime, endTime, queryTime) => startTime.reduce((count, time, i) => count + (time <= queryTime && endTime[i] >= queryTime ? 1 : 0), 0)
+const busyStudent = (startTime, endTime, queryTime) =>
+  startTime.reduce((count, time, i) => count + (time <= queryTime && endTime[i] >= queryTime ? 1 : 0), 0);
 
 module.exports = {
-    busyStudent
-}
+  busyStudent
+};
