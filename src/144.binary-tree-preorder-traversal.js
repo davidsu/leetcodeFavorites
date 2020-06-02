@@ -41,10 +41,10 @@
  * @return {number[]}
  */
 function preorderTraversal(root) {
-  if (!root) return [];
-  return [root.val, ...preorderTraversal(root.left), ...preorderTraversal(root.right)];
+  if (!root) return []
+  return [root.val, ...preorderTraversal(root.left), ...preorderTraversal(root.right)]
 }
 
 module.exports = {
   testFunc: preorderTraversal
-};
+}

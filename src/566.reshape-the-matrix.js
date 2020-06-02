@@ -74,20 +74,20 @@
  */
 // eslint-disable-next-line no-extend-native
 Array.prototype.flat = function () {
-  const result = [];
+  const result = []
   for (const a of this) {
-    result.push(...a);
+    result.push(...a)
   }
-  return result;
-};
+  return result
+}
 const matrixReshape = function (nums, r, c) {
-  if (nums.length * nums[0].length !== r * c) return nums;
-  const result = [];
-  const working = nums.flat();
-  while (working.length) result.push(working.splice(0, c));
-  return result;
-};
+  if (nums.length * nums[0].length !== r * c) return nums
+  const result = []
+  const working = nums.flat()
+  while (working.length) result.push(working.splice(0, c))
+  return result
+}
 
 module.exports = {
   testFunc: matrixReshape
-};
+}

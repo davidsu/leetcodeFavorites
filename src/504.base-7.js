@@ -36,17 +36,17 @@
  * @return {string}
  */
 const convertToBase7 = function (num) {
-  if (!num) return '0';
-  const sign = num < 0 ? '-' : '';
-  num = Math.abs(num);
-  const arr = [];
+  if (!num) return '0'
+  const sign = num < 0 ? '-' : ''
+  num = Math.abs(num)
+  const arr = []
   while (num) {
-    arr.push(num % 7);
-    num = Math.floor(num / 7);
+    arr.push(num % 7)
+    num = Math.floor(num / 7)
   }
-  return sign + arr.reverse().join('');
-};
+  return sign + arr.reverse().join('')
+}
 
 module.exports = {
   convertToBase7
-};
+}

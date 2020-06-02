@@ -39,8 +39,8 @@
  * @return {number}
  */
 // https://leetcode.com/problems/sum-of-two-integers/discuss/606544/Javascript%3A-Very-detailed-explanation-with-two-code-versions.-Enjoy!
-const getSum = (a, b) => (b ? getSum(a ^ b, (a & b) << 1) : a);
+const getSum = (a, b) => (b ? getSum(a ^ b, (a & b) << 1) : a)
 
 module.exports = {
   getSum
-};
+}

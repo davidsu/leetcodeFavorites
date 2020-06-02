@@ -71,8 +71,8 @@ const minStartValue = (nums) =>
       min: Math.min(min, val + sum)
     }),
     { sum: 0, min: 0 }
-  ).min + 1;
+  ).min + 1
 
 module.exports = {
   minStartValue
-};
+}

@@ -63,20 +63,20 @@
  */
 function nextGreaterElement(nums1, nums2) {
   const mapCreator = () => {
-    const stack = [Infinity];
-    const res = {};
+    const stack = [Infinity]
+    const res = {}
     for (const n of nums2) {
       while (n > stack[stack.length - 1]) {
-        res[stack.pop()] = n;
+        res[stack.pop()] = n
       }
-      stack.push(n);
+      stack.push(n)
     }
-    return res;
-  };
-  const map = mapCreator();
-  return nums1.map((n) => map[n] || -1);
+    return res
+  }
+  const map = mapCreator()
+  return nums1.map((n) => map[n] || -1)
 }
 
 module.exports = {
   nextGreaterElement
-};
+}

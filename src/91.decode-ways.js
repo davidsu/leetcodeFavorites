@@ -46,23 +46,23 @@
  * @return {number}
  */
 const numDecodings = function (s) {
-  if (!s || /(^0+|[03-9]0)/.test(s)) return 0;
-  const map = s.split('').map(() => 1);
-  map.push(1);
+  if (!s || /(^0+|[03-9]0)/.test(s)) return 0
+  const map = s.split('').map(() => 1)
+  map.push(1)
   for (let i = s.length - 1; i >= 0; i--) {
-    const num = parseInt(s[i]);
-    const joined = num * 10 + parseInt(s[i + 1]);
+    const num = parseInt(s[i])
+    const joined = num * 10 + parseInt(s[i + 1])
     if (num === 0) {
-      map[i] = 0;
+      map[i] = 0
     } else if (joined > 9 && joined < 27) {
-      map[i] = map[i + 1] + map[i + 2];
+      map[i] = map[i + 1] + map[i + 2]
     } else {
-      map[i] = map[i + 1];
+      map[i] = map[i + 1]
     }
   }
-  return map[0];
-};
+  return map[0]
+}
 
 module.exports = {
   numDecodings
-};
+}

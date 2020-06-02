@@ -32,36 +32,36 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 const nextPermutation = function (nums) {
-  if (!nums || nums.length < 2) return nums;
+  if (!nums || nums.length < 2) return nums
   const getLastOutOfOrder = () => {
-    let last = nums.length - 1;
-    while (last > 0 && nums[last] <= nums[last - 1]) last--;
-    return last ? last - 1 : -1;
-  };
-  const lastOutOfOrder = getLastOutOfOrder();
+    let last = nums.length - 1
+    while (last > 0 && nums[last] <= nums[last - 1]) last--
+    return last ? last - 1 : -1
+  }
+  const lastOutOfOrder = getLastOutOfOrder()
   if (lastOutOfOrder === -1) {
-    nums.reverse();
-    return nums;
+    nums.reverse()
+    return nums
   }
   // everything up to outOfOrder should stay as is
-  const prefix = nums.splice(0, lastOutOfOrder);
+  const prefix = nums.splice(0, lastOutOfOrder)
 
-  const suffix = [];
+  const suffix = []
 
   // takeWhile not nextBigger
-  while (nums[nums.length - 1] <= nums[0]) suffix.push(nums.pop());
-  suffix.push(nums.shift());
+  while (nums[nums.length - 1] <= nums[0]) suffix.push(nums.pop())
+  suffix.push(nums.shift())
 
   // newDivisor is nextBigger
-  const newDivisor = nums.pop();
-  const result = [...prefix, newDivisor, ...suffix, ...nums.reverse()];
+  const newDivisor = nums.pop()
+  const result = [...prefix, newDivisor, ...suffix, ...nums.reverse()]
 
   // reconstruct nums
-  nums.length = 0;
-  nums.push(...result);
-  return nums;
-};
+  nums.length = 0
+  nums.push(...result)
+  return nums
+}
 
 module.exports = {
   nextPermutation
-};
+}

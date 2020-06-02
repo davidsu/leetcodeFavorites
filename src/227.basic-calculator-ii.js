@@ -51,48 +51,48 @@
  */
 // this is a terrible slow solution, need to solve it with stack, it's only simple enough to implement and understand
 const calculate = function (s) {
-  let expression = s.replace(/\s+/g, '');
+  let expression = s.replace(/\s+/g, '')
   while (/[*/]/.test(expression)) {
-    expression = expression.replace(/(\d+[*/]\d+)/, (_, expr) => Math.floor(eval(expr))); // eslint-disable-line no-eval
+    expression = expression.replace(/(\d+[*/]\d+)/, (_, expr) => Math.floor(eval(expr))) // eslint-disable-line no-eval
   }
   while (/\d[+-]/.test(expression)) {
-    expression = expression.replace(/((?:^-)?\d+[+-]\d+)/, (_, expr) => Math.floor(eval(expr))); // eslint-disable-line no-eval
+    expression = expression.replace(/((?:^-)?\d+[+-]\d+)/, (_, expr) => Math.floor(eval(expr))) // eslint-disable-line no-eval
   }
-  return Number(expression);
-};
+  return Number(expression)
+}
 
 function runOp(num, sign, stack) {
   switch (sign) {
     case '+':
-      return stack.push(num);
+      return stack.push(num)
     case '-':
-      return stack.push(-num);
+      return stack.push(-num)
     case '*':
-      return stack.push(num * stack.pop());
+      return stack.push(num * stack.pop())
   }
-  const result = stack.pop() / num;
-  stack.push(result > 0 ? Math.floor(result) : Math.ceil(result));
+  const result = stack.pop() / num
+  stack.push(result > 0 ? Math.floor(result) : Math.ceil(result))
 }
 const stackBased = (s) => {
-  let sign = '+';
-  let num = 0;
-  const stack = [];
-  const isNumRegex = /\d/;
-  const isNum = (n) => isNumRegex.test(n);
+  let sign = '+'
+  let num = 0
+  const stack = []
+  const isNumRegex = /\d/
+  const isNum = (n) => isNumRegex.test(n)
   for (const c of s.replace(/\s+/g, '').split('')) {
     if (isNum(c)) {
-      num = num * 10 + Number(c);
+      num = num * 10 + Number(c)
     } else {
-      runOp(num, sign, stack);
-      sign = c;
-      num = 0;
+      runOp(num, sign, stack)
+      sign = c
+      num = 0
     }
   }
-  runOp(num, sign, stack);
-  return stack.reduce((res, num) => res + num);
-};
+  runOp(num, sign, stack)
+  return stack.reduce((res, num) => res + num)
+}
 
 module.exports = {
   testFunc: calculate,
   stackBased
-};
+}

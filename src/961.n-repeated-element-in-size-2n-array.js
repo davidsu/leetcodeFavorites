@@ -64,10 +64,10 @@
  * @return {number}
  */
 const repeatedNTimes = (A) => {
-  const seen = {};
-  return A.find((n) => n in seen || (seen[n] = 0));
-};
+  const seen = {}
+  return A.find((n) => n in seen || (seen[n] = 0))
+}
 
 module.exports = {
   repeatedNTimes
-};
+}

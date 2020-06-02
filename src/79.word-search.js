@@ -41,24 +41,24 @@
 function exist(board, word) {
   function calc(idx, i, j, seen) {
     // console.log({idx, i, j, c: word[idx], C: board[i] && board[i][j]})
-    if (idx === word.length) return true;
-    const key = `${i},${j}`;
-    if (key in seen) return false;
-    if (!board[i] || board[i][j] !== word[idx]) return false;
-    const next = idx + 1;
-    seen[key] = true;
-    if (calc(next, i + 1, j, seen) || calc(next, i - 1, j, seen) || calc(next, i, j - 1, seen) || calc(next, i, j + 1, seen)) return true;
-    delete seen[key];
-    return false;
+    if (idx === word.length) return true
+    const key = `${i},${j}`
+    if (key in seen) return false
+    if (!board[i] || board[i][j] !== word[idx]) return false
+    const next = idx + 1
+    seen[key] = true
+    if (calc(next, i + 1, j, seen) || calc(next, i - 1, j, seen) || calc(next, i, j - 1, seen) || calc(next, i, j + 1, seen)) return true
+    delete seen[key]
+    return false
   }
   for (const i of Object.keys(board)) {
     for (const j of Object.keys(board[i])) {
-      if (calc(0, Number(i), Number(j), {})) return true;
+      if (calc(0, Number(i), Number(j), {})) return true
     }
   }
-  return false;
+  return false
 }
 
 module.exports = {
   exist
-};
+}

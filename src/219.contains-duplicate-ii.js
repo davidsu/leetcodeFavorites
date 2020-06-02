@@ -49,13 +49,13 @@
  * @return {boolean}
  */
 function containsNearbyDuplicate(nums, k) {
-  const map = {};
+  const map = {}
   return nums.some((val, idx) => {
-    if (val in map && idx - map[val] <= k) return true;
-    map[val] = idx;
-  });
+    if (val in map && idx - map[val] <= k) return true
+    map[val] = idx
+  })
 }
 
 module.exports = {
   testFunc: containsNearbyDuplicate
-};
+}

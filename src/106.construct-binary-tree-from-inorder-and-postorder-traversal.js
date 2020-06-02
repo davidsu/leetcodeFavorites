@@ -46,30 +46,30 @@
  * @return {TreeNode}
  */
 const findRootIdx = (inorder, startIdx, endIdx, rootVal) => {
-  let runner = startIdx;
+  let runner = startIdx
   while (runner <= endIdx) {
     if (inorder[runner] === rootVal) {
-      return runner;
+      return runner
     }
-    runner++;
+    runner++
   }
-  return -1;
-};
+  return -1
+}
 
 function buildTree(inorder, postorder, startIdx = 0, endIdx = inorder.length - 1) {
-  if (!postorder.length || startIdx > endIdx) return null;
-  const rootVal = postorder.pop();
-  const inOrderRootIdx = findRootIdx(inorder, startIdx, endIdx, rootVal);
+  if (!postorder.length || startIdx > endIdx) return null
+  const rootVal = postorder.pop()
+  const inOrderRootIdx = findRootIdx(inorder, startIdx, endIdx, rootVal)
 
   const root = {
     val: rootVal,
     right: buildTree(inorder, postorder, inOrderRootIdx + 1, endIdx),
     left: buildTree(inorder, postorder, startIdx, inOrderRootIdx - 1)
-  };
+  }
 
-  return root;
+  return root
 }
 
 module.exports = {
   buildTree
-};
+}

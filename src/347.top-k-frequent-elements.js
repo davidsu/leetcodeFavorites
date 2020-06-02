@@ -44,15 +44,15 @@
  */
 const topKFrequent = function (nums, k) {
   const frequencies = nums.reduce((acc, val) => {
-    acc[val] = (acc[val] || 0) + 1;
-    return acc;
-  }, {});
+    acc[val] = (acc[val] || 0) + 1
+    return acc
+  }, {})
   return Object.entries(frequencies)
     .sort(([_, freq1], [_2, freq2]) => freq2 - freq1)
     .map(([val]) => parseInt(val))
-    .splice(0, k);
-};
+    .splice(0, k)
+}
 
 module.exports = {
   topKFrequent
-};
+}

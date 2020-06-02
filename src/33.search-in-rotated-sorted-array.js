@@ -44,39 +44,39 @@
  */
 function search(nums, target) {
   function findStart() {
-    let low = 0;
-    let high = nums.length - 1;
+    let low = 0
+    let high = nums.length - 1
     while (low < high) {
-      const mid = Math.floor((low + high) / 2);
-      if (nums[mid] > nums[mid + 1]) return mid + 1;
+      const mid = Math.floor((low + high) / 2)
+      if (nums[mid] > nums[mid + 1]) return mid + 1
       if (nums[mid] > nums[low]) {
-        low = mid + 1;
+        low = mid + 1
       } else {
-        high = mid;
+        high = mid
       }
     }
-    return 0;
+    return 0
   }
   function offsetSearch(offset) {
-    let low = offset;
-    let high = nums.length + offset - 1;
+    let low = offset
+    let high = nums.length + offset - 1
     while (low <= high) {
-      const mid = Math.floor((low + high) / 2);
-      const realMid = mid % nums.length;
+      const mid = Math.floor((low + high) / 2)
+      const realMid = mid % nums.length
       if (nums[realMid] < target) {
-        low = mid + 1;
+        low = mid + 1
       } else if (nums[realMid] > target) {
-        high = mid - 1;
+        high = mid - 1
       } else {
-        return realMid;
+        return realMid
       }
     }
-    return -1;
+    return -1
   }
-  const start = findStart();
-  return offsetSearch(start);
+  const start = findStart()
+  return offsetSearch(start)
 }
 
 module.exports = {
   search
-};
+}

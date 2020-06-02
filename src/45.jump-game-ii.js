@@ -37,26 +37,26 @@
  * @return {number}
  */
 function jump(nums) {
-  let jumps = 0;
-  let nextIdx = 0;
+  let jumps = 0
+  let nextIdx = 0
   while (nextIdx < nums.length - 1) {
-    jumps++;
-    const idx = nextIdx;
+    jumps++
+    const idx = nextIdx
     if (idx + nums[idx] >= nums.length - 1) {
-      break;
+      break
     }
-    let bestNext = idx;
+    let bestNext = idx
     for (let jumpSize = nums[idx]; jumpSize > 0; jumpSize--) {
-      const jumpStart = idx + jumpSize;
+      const jumpStart = idx + jumpSize
       if (nums[jumpStart] + jumpStart > bestNext) {
-        nextIdx = jumpStart;
-        bestNext = nums[jumpStart] + jumpStart;
+        nextIdx = jumpStart
+        bestNext = nums[jumpStart] + jumpStart
       }
     }
   }
-  return jumps;
+  return jumps
 }
 
 module.exports = {
   jump
-};
+}

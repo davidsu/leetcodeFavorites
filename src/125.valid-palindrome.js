@@ -37,10 +37,10 @@
  * @return {boolean}
  */
 const isPalindrome = (s) => {
-  const realS = s.replace(/[^a-zA-Z]/g, '').toLowerCase();
-  return realS === realS.split('').reverse().join('');
-};
+  const realS = s.replace(/[^a-zA-Z]/g, '').toLowerCase()
+  return realS === realS.split('').reverse().join('')
+}
 
 module.exports = {
   isPalindrome
-};
+}

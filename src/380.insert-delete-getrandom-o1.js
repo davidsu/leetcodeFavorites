@@ -56,15 +56,15 @@
  * Initialize your data structure here.
  */
 const RandomizedSet = function () {
-  const map = new Map();
-  const values = [];
+  const map = new Map()
+  const values = []
   function swap(idx) {
-    const lastIdx = values.length - 1;
-    if (idx === lastIdx) return;
-    const last = values[lastIdx];
-    values[lastIdx] = values[idx];
-    map.set(last, idx);
-    values[idx] = last;
+    const lastIdx = values.length - 1
+    if (idx === lastIdx) return
+    const last = values[lastIdx]
+    values[lastIdx] = values[idx]
+    map.set(last, idx)
+    values[idx] = last
   }
   /**
    * Inserts a value to the set. Returns true if the set did not already contain the specified element.
@@ -72,10 +72,10 @@ const RandomizedSet = function () {
    * @return {boolean}
    */
   function insert(val) {
-    if (map.has(val)) return false;
-    values.push(val);
-    map.set(val, values.length - 1);
-    return true;
+    if (map.has(val)) return false
+    values.push(val)
+    map.set(val, values.length - 1)
+    return true
   }
 
   /**
@@ -84,12 +84,12 @@ const RandomizedSet = function () {
    * @return {boolean}
    */
   function remove(val) {
-    if (!map.has(val)) return false;
-    const idx = map.get(val);
-    swap(idx);
-    values.pop();
-    map.delete(val);
-    return true;
+    if (!map.has(val)) return false
+    const idx = map.get(val)
+    swap(idx)
+    values.pop()
+    map.delete(val)
+    return true
   }
 
   /**
@@ -97,10 +97,10 @@ const RandomizedSet = function () {
    * @return {number}
    */
   function getRandom() {
-    return values[parseInt(Math.random() * values.length)];
+    return values[parseInt(Math.random() * values.length)]
   }
-  return { insert, remove, getRandom };
-};
+  return { insert, remove, getRandom }
+}
 
 /**
  * Your RandomizedSet object will be instantiated and called as such:
@@ -112,4 +112,4 @@ const RandomizedSet = function () {
 
 module.exports = {
   RandomizedSet
-};
+}

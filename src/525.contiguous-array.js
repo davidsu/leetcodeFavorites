@@ -46,14 +46,14 @@ const findMaxLength = (nums) =>
     .map((v) => v || -1)
     .reduce(
       ({ max, hash, count }, num, i) => {
-        count += num;
-        if (count in hash) max = Math.max(max, i - hash[count]);
-        else hash[count] = i;
-        return { max, hash, count };
+        count += num
+        if (count in hash) max = Math.max(max, i - hash[count])
+        else hash[count] = i
+        return { max, hash, count }
       },
       { max: 0, hash: { 0: -1 }, count: 0 }
-    ).max || 0;
+    ).max || 0
 
 module.exports = {
   findMaxLength
-};
+}

@@ -51,19 +51,19 @@
  * @return {number}
  */
 const arrangeCoins = (n) => {
-  let low = 0;
-  let high = n;
+  let low = 0
+  let high = n
   while (low < high) {
-    const mid = Math.ceil((low + high) / 2);
+    const mid = Math.ceil((low + high) / 2)
     if ((mid * (mid + 1)) / 2 > n) {
-      high = mid - 1;
+      high = mid - 1
     } else {
-      low = mid;
+      low = mid
     }
   }
-  return low;
-};
+  return low
+}
 
 module.exports = {
   arrangeCoins
-};
+}

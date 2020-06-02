@@ -36,23 +36,23 @@
  * @return {number}
  */
 function longestValidParentheses(s) {
-  const current = s.split('').map(() => 0);
+  const current = s.split('').map(() => 0)
   for (let i = 1; i < s.length; i++) {
     if (s[i] !== ')') {
-      current[i] = 0;
-      continue;
+      current[i] = 0
+      continue
     }
     if (s[i - 1] === '(') {
-      current[i] = 2 + (current[i - 2] || 0);
+      current[i] = 2 + (current[i - 2] || 0)
     }
     if (current[i - 1] && s[i - current[i - 1] - 1] === '(') {
-      current[i] = current[i - 1] + 2;
+      current[i] = current[i - 1] + 2
     }
-    current[i] = current[i] + (current[i - current[i]] || 0);
+    current[i] = current[i] + (current[i - current[i]] || 0)
   }
-  return Math.max(...current, 0);
+  return Math.max(...current, 0)
 }
 
 module.exports = {
   longestValidParentheses
-};
+}

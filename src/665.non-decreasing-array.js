@@ -45,18 +45,18 @@
  * @param {number[]} nums
  * @return {boolean}
  */
-const nonDecreasingIndex = (nums) => nums.findIndex((val, idx) => val > nums[idx + 1]);
+const nonDecreasingIndex = (nums) => nums.findIndex((val, idx) => val > nums[idx + 1])
 function checkPossibility(nums) {
-  const idx = nonDecreasingIndex(nums);
-  if (idx === -1) return true;
-  const val = nums[idx];
-  nums[idx] = nums[idx - 1] || -Infinity;
-  if (nonDecreasingIndex(nums) === -1) return true;
-  nums[idx] = val;
-  nums[idx + 1] = val;
-  return nonDecreasingIndex(nums) === -1;
+  const idx = nonDecreasingIndex(nums)
+  if (idx === -1) return true
+  const val = nums[idx]
+  nums[idx] = nums[idx - 1] || -Infinity
+  if (nonDecreasingIndex(nums) === -1) return true
+  nums[idx] = val
+  nums[idx + 1] = val
+  return nonDecreasingIndex(nums) === -1
 }
 
 module.exports = {
   checkPossibility
-};
+}

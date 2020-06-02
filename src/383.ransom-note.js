@@ -41,20 +41,20 @@
  */
 const strToFrequency = (str) =>
   str.split('').reduce((acc, c) => {
-    acc[c] = (acc[c] || 0) + 1;
-    return acc;
-  }, {});
+    acc[c] = (acc[c] || 0) + 1
+    return acc
+  }, {})
 const canConstruct = function (ransomNote, magazine) {
-  const ransomFrequency = strToFrequency(ransomNote);
-  const magazineFrequency = strToFrequency(magazine);
+  const ransomFrequency = strToFrequency(ransomNote)
+  const magazineFrequency = strToFrequency(magazine)
   for (const [c, freq] of Object.entries(ransomFrequency)) {
     if (!magazineFrequency[c] || magazineFrequency[c] < freq) {
-      return false;
+      return false
     }
   }
-  return true;
-};
+  return true
+}
 
 module.exports = {
   testFunc: canConstruct
-};
+}

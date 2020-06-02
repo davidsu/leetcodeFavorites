@@ -72,8 +72,8 @@
  * @return {void} Do not return anything, modify board in-place instead.
  */
 const gameOfLife = function (board) {
-  const isDead = (i, j) => board[i][j] === 0 || board[i][j] >= 20;
-  const isAlive = (i, j) => !isDead(i, j);
+  const isDead = (i, j) => board[i][j] === 0 || board[i][j] >= 20
+  const isAlive = (i, j) => !isDead(i, j)
   const getNeighbors = (i, j) =>
     [
       [i - 1, j - 1],
@@ -84,27 +84,27 @@ const gameOfLife = function (board) {
       [i + 1, j - 1],
       [i + 1, j],
       [i + 1, j + 1]
-    ].filter(([i, j]) => i in board && j in board[i]);
+    ].filter(([i, j]) => i in board && j in board[i])
   const getLiveNeighborCount = (i, j) =>
     getNeighbors(i, j)
       .map(([i, j]) => isAlive(i, j))
-      .reduce((a, b) => a + b, 0);
+      .reduce((a, b) => a + b, 0)
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
-      const alive = !!board[i][j];
-      const aliveIndicator = alive ? 10 : 20;
-      const liveNeighbotCount = getLiveNeighborCount(i, j);
-      const willLive = (alive && (liveNeighbotCount === 2 || liveNeighbotCount === 3)) || (!alive && liveNeighbotCount === 3);
-      board[i][j] = aliveIndicator + willLive;
+      const alive = !!board[i][j]
+      const aliveIndicator = alive ? 10 : 20
+      const liveNeighbotCount = getLiveNeighborCount(i, j)
+      const willLive = (alive && (liveNeighbotCount === 2 || liveNeighbotCount === 3)) || (!alive && liveNeighbotCount === 3)
+      board[i][j] = aliveIndicator + willLive
     }
   }
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
-      board[i][j] = board[i][j] % 2;
+      board[i][j] = board[i][j] % 2
     }
   }
-};
+}
 
 module.exports = {
   gameOfLife
-};
+}

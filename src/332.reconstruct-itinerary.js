@@ -55,59 +55,59 @@ const findItinerary = function (tickets) {
     Object.assign(acc, {
       [origin]: acc[origin] || { destinies: [], visited: new Set() },
       [dest]: acc[dest] || { destinies: [], visited: new Set() }
-    });
-    acc[origin].destinies.push(dest);
-    return acc;
-  }, {});
-  for (const { destinies } of Object.values(graph)) destinies.sort();
+    })
+    acc[origin].destinies.push(dest)
+    return acc
+  }, {})
+  for (const { destinies } of Object.values(graph)) destinies.sort()
 
-  const path = ['JFK'];
+  const path = ['JFK']
   function traverse() {
-    if (path.length === tickets.length + 1) return true;
-    const orig = path[path.length - 1];
-    const { destinies, visited } = graph[orig];
+    if (path.length === tickets.length + 1) return true
+    const orig = path[path.length - 1]
+    const { destinies, visited } = graph[orig]
     for (let i = 0; i < destinies.length; i++) {
       if (!visited.has(i)) {
-        visited.add(i);
-        path.push(destinies[i]);
-        if (traverse()) return true;
-        path.pop();
-        visited.delete(i);
+        visited.add(i)
+        path.push(destinies[i])
+        if (traverse()) return true
+        path.pop()
+        visited.delete(i)
       }
     }
   }
-  traverse();
-  return path;
-};
+  traverse()
+  return path
+}
 
 // elegant solution by https://leetcode.com/problems/reconstruct-itinerary/discuss/437594/super-easy-and-clean-Javascript-(Greedy)-DFS-with-detailed-explanations
 const findItinerary2 = function (tickets) {
-  const map = {};
-  const res = [];
+  const map = {}
+  const res = []
   for (let i = 0; i < tickets.length; i++) {
-    const dep = tickets[i][0];
-    const des = tickets[i][1];
+    const dep = tickets[i][0]
+    const des = tickets[i][1]
     if (map[dep]) {
-      map[dep].push(des);
+      map[dep].push(des)
     } else {
-      map[dep] = [des];
+      map[dep] = [des]
     }
   }
   for (const loc in map) {
-    map[loc].sort();
+    map[loc].sort()
   }
   const dfs = function (node) {
-    const des = map[node];
+    const des = map[node]
     // eslint-disable-next-line no-unmodified-loop-condition
     while (des && des.length > 0) {
-      dfs(des.shift());
+      dfs(des.shift())
     }
-    res.push(node);
-  };
-  dfs('JFK');
-  return res.reverse();
-};
+    res.push(node)
+  }
+  dfs('JFK')
+  return res.reverse()
+}
 module.exports = {
   findItinerary,
   findItinerary2
-};
+}

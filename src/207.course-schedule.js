@@ -54,47 +54,47 @@
  * @return {boolean}
  */
 const canFinish = function (numCourses, prerequisites) {
-  const g = new Array(numCourses).fill(0).map(() => new Set());
+  const g = new Array(numCourses).fill(0).map(() => new Set())
   for (const [course, needs] of prerequisites) {
-    g[course].add(needs);
+    g[course].add(needs)
   }
   const dfs = (course) => {
-    if (!g[course].size) return true;
-    if (g[course].visited) return false;
-    g[course].visited = true;
+    if (!g[course].size) return true
+    if (g[course].visited) return false
+    g[course].visited = true
     for (const needs of g[course]) {
-      if (!dfs(needs)) return false;
-      g[course].delete(needs);
+      if (!dfs(needs)) return false
+      g[course].delete(needs)
     }
-    return true;
-  };
-  return g.reduce((doable, _, course) => doable && dfs(course), true);
-};
+    return true
+  }
+  return g.reduce((doable, _, course) => doable && dfs(course), true)
+}
 
 function betterPerformance(_, prerequisites) {
   const courses = prerequisites.reduce((acc, [course, pre]) => {
-    acc[course] = acc[course] || { next: [], prerequisiteCount: 0, id: course };
-    acc[pre] = acc[pre] || { next: [], prerequisiteCount: 0, id: pre };
-    acc[course].prerequisiteCount++;
-    acc[pre].next.push(course);
-    return acc;
-  }, {});
-  const coursesArr = Object.values(courses);
-  const completed = coursesArr.filter(({ prerequisiteCount }) => !prerequisiteCount);
+    acc[course] = acc[course] || { next: [], prerequisiteCount: 0, id: course }
+    acc[pre] = acc[pre] || { next: [], prerequisiteCount: 0, id: pre }
+    acc[course].prerequisiteCount++
+    acc[pre].next.push(course)
+    return acc
+  }, {})
+  const coursesArr = Object.values(courses)
+  const completed = coursesArr.filter(({ prerequisiteCount }) => !prerequisiteCount)
   while (completed.length) {
-    const { next, id } = completed.pop();
-    delete courses[id];
+    const { next, id } = completed.pop()
+    delete courses[id]
     next.forEach((nextCourse) => {
-      const course = courses[nextCourse];
-      course.prerequisiteCount--;
+      const course = courses[nextCourse]
+      course.prerequisiteCount--
       if (!course.prerequisiteCount) {
-        completed.push(course);
+        completed.push(course)
       }
-    });
+    })
   }
-  return !Object.keys(courses).length;
+  return !Object.keys(courses).length
 }
 module.exports = {
   betterPerformance,
   canFinish
-};
+}

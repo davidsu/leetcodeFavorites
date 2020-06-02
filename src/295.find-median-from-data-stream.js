@@ -57,52 +57,52 @@
  * initialize your data structure here.
  */
 function heap(compare) {
-  const nums = [];
-  const getParent = (idx) => parseInt((idx - 1) / 2);
-  const getLeft = (idx) => (idx + 1) * 2 - 1;
-  const getRight = (idx) => getLeft(idx) + 1;
-  const exists = (idx) => idx < nums.length;
+  const nums = []
+  const getParent = (idx) => parseInt((idx - 1) / 2)
+  const getLeft = (idx) => (idx + 1) * 2 - 1
+  const getRight = (idx) => getLeft(idx) + 1
+  const exists = (idx) => idx < nums.length
   const swap = (i, j) => {
-    [nums[i], nums[j]] = [nums[j], nums[i]];
-  };
+    ;[nums[i], nums[j]] = [nums[j], nums[i]]
+  }
   function push(num) {
-    let idx = nums.length;
-    nums.push(num);
+    let idx = nums.length
+    nums.push(num)
     while (idx > 0 && compare(num, nums[getParent(idx)])) {
-      const parent = getParent(idx);
-      swap(idx, parent);
-      idx = parent;
+      const parent = getParent(idx)
+      swap(idx, parent)
+      idx = parent
     }
   }
   function bubbleDown(idx) {
-    const left = getLeft(idx);
-    const right = getRight(idx);
-    if (!exists(left)) return;
+    const left = getLeft(idx)
+    const right = getRight(idx)
+    if (!exists(left)) return
     if (!exists(right)) {
-      if (compare(nums[idx], nums[left])) return;
-      swap(idx, left);
-      return bubbleDown(left);
+      if (compare(nums[idx], nums[left])) return
+      swap(idx, left)
+      return bubbleDown(left)
     }
-    const next = compare(nums[left], nums[right]) ? left : right;
-    const shouldSwap = !compare(nums[idx], nums[next]);
+    const next = compare(nums[left], nums[right]) ? left : right
+    const shouldSwap = !compare(nums[idx], nums[next])
     if (shouldSwap) {
-      swap(idx, next);
-      bubbleDown(next);
+      swap(idx, next)
+      bubbleDown(next)
     }
   }
   function swapRoot(rootVal) {
-    nums[0] = rootVal;
-    bubbleDown(0);
+    nums[0] = rootVal
+    bubbleDown(0)
   }
   function pop() {
-    const root = getRoot();
-    const next = nums.pop();
+    const root = getRoot()
+    const next = nums.pop()
     if (nums.length) {
-      swapRoot(next);
+      swapRoot(next)
     }
-    return root;
+    return root
   }
-  const getRoot = () => nums[0];
+  const getRoot = () => nums[0]
   return {
     push,
     getRoot,
@@ -110,35 +110,35 @@ function heap(compare) {
     swapRoot,
     nums,
     get size() {
-      return nums.length;
+      return nums.length
     }
-  };
+  }
 }
-const minHeapFactory = () => heap((a, b) => a < b);
-const maxHeapFactory = () => heap((a, b) => a > b);
+const minHeapFactory = () => heap((a, b) => a < b)
+const maxHeapFactory = () => heap((a, b) => a > b)
 const MedianFinder = function () {
-  const minHeap = minHeapFactory();
-  const maxHeap = maxHeapFactory();
+  const minHeap = minHeapFactory()
+  const maxHeap = maxHeapFactory()
   function addNum(num) {
-    minHeap.push(num);
+    minHeap.push(num)
     if (minHeap.size > maxHeap.size) {
-      maxHeap.push(minHeap.pop());
+      maxHeap.push(minHeap.pop())
     } else if (minHeap.getRoot() < maxHeap.getRoot()) {
-      addNum(maxHeap.pop());
+      addNum(maxHeap.pop())
     }
   }
   function findMedian() {
-    const size = minHeap.size + maxHeap.size;
+    const size = minHeap.size + maxHeap.size
     if (size % 2) {
-      return maxHeap.getRoot();
+      return maxHeap.getRoot()
     }
-    return (minHeap.getRoot() + maxHeap.getRoot()) / 2;
+    return (minHeap.getRoot() + maxHeap.getRoot()) / 2
   }
-  return { addNum, findMedian };
-};
+  return { addNum, findMedian }
+}
 
 module.exports = {
   MedianFinder,
   minHeapFactory,
   maxHeapFactory
-};
+}

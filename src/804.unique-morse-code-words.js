@@ -83,9 +83,9 @@ const letters = [
   '-..-',
   '-.--',
   '--..'
-];
-const a = 'a'.codePointAt(0);
-const getLetter = (letter) => letters[letter.codePointAt(0) - a];
+]
+const a = 'a'.codePointAt(0)
+const getLetter = (letter) => letters[letter.codePointAt(0) - a]
 const uniqueMorseRepresentations = (words) =>
   new Set(
     words.map((word) =>
@@ -94,8 +94,8 @@ const uniqueMorseRepresentations = (words) =>
         .map((letter) => getLetter(letter))
         .join('')
     )
-  ).size;
+  ).size
 
 module.exports = {
   uniqueMorseRepresentations
-};
+}

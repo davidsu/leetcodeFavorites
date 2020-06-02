@@ -51,17 +51,17 @@
  * @param {number[][]} coordinates
  * @return {boolean}
  */
-const getY = (x, m, b) => x * m + b;
-const getM = ([x1, y1], [x2, y2]) => (y1 - y2) / (x1 - x2);
-const getB = (x, y, m) => y - x * m;
+const getY = (x, m, b) => x * m + b
+const getM = ([x1, y1], [x2, y2]) => (y1 - y2) / (x1 - x2)
+const getB = (x, y, m) => y - x * m
 const checkStraightLine = function (coordinates) {
-  if (coordinates.length < 3) return true;
-  if (coordinates[0][0] === coordinates[1][0]) return coordinates.every(([x]) => x === coordinates[0][0]);
-  const m = getM(coordinates[0], coordinates[1]);
-  const b = getB(coordinates[0][0], coordinates[0][1], m);
-  return coordinates.every(([x, y]) => y === getY(x, m, b));
-};
+  if (coordinates.length < 3) return true
+  if (coordinates[0][0] === coordinates[1][0]) return coordinates.every(([x]) => x === coordinates[0][0])
+  const m = getM(coordinates[0], coordinates[1])
+  const b = getB(coordinates[0][0], coordinates[0][1], m)
+  return coordinates.every(([x, y]) => y === getY(x, m, b))
+}
 
 module.exports = {
   checkStraightLine
-};
+}

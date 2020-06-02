@@ -63,16 +63,16 @@ const naive = (num) =>
       .map((a) => (a + 1) % 2)
       .join(''),
     2
-  );
+  )
 const better = (num) => {
-  let mask = 1;
+  let mask = 1
   while (mask < num) {
-    mask = (mask << 1) | 1;
+    mask = (mask << 1) | 1
   }
-  return num ^ mask;
-};
+  return num ^ mask
+}
 
 module.exports = {
   naive,
   better
-};
+}

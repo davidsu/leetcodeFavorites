@@ -54,13 +54,13 @@
  */
 const invertTree = (root) => {
   if (root) {
-    [root.left, root.right] = [root.right, root.left];
-    invertTree(root.right);
-    invertTree(root.left);
+    ;[root.left, root.right] = [root.right, root.left]
+    invertTree(root.right)
+    invertTree(root.left)
   }
-  return root;
-};
+  return root
+}
 
 module.exports = {
   invertTree
-};
+}

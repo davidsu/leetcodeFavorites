@@ -56,20 +56,20 @@
  */
 // see https://leetcode.com/problems/path-sum-iii/discuss/141424/Python-step-by-step-walk-through.-Easy-to-understand.-Two-solutions-comparison.-%3A-
 const pathSum = function (root, sum) {
-  const freq = { 0: 1 };
+  const freq = { 0: 1 }
   function dfs(root, currSum) {
-    if (!root) return 0;
-    currSum += root.val;
-    const oldSum = currSum - sum;
-    let res = freq[oldSum] || 0;
-    freq[currSum] = (freq[currSum] || 0) + 1;
-    res += dfs(root.left, currSum) + dfs(root.right, currSum);
-    freq[currSum]--;
-    return res;
+    if (!root) return 0
+    currSum += root.val
+    const oldSum = currSum - sum
+    let res = freq[oldSum] || 0
+    freq[currSum] = (freq[currSum] || 0) + 1
+    res += dfs(root.left, currSum) + dfs(root.right, currSum)
+    freq[currSum]--
+    return res
   }
-  return dfs(root, 0);
-};
+  return dfs(root, 0)
+}
 
 module.exports = {
   pathSum
-};
+}

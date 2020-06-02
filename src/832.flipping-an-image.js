@@ -51,8 +51,8 @@
  * @param {number[][]} A
  * @return {number[][]}
  */
-const flipAndInvertImage = (A) => A.map((row) => row.map((bit) => bit ^ 1).reverse());
+const flipAndInvertImage = (A) => A.map((row) => row.map((bit) => bit ^ 1).reverse())
 
 module.exports = {
   flipAndInvertImage
-};
+}

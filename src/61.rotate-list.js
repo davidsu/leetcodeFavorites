@@ -49,33 +49,33 @@
  * @return {ListNode}
  */
 function getFast(head, k) {
-  let fast = head;
-  let i = 0;
+  let fast = head
+  let i = 0
   while (i < k && fast) {
-    fast = fast.next;
-    i++;
+    fast = fast.next
+    i++
   }
   if (i < k) {
-    return getFast(head, k % i);
+    return getFast(head, k % i)
   }
-  return fast;
+  return fast
 }
 const rotateRight = function (head, k) {
-  let slow = head;
-  let fast = getFast(head, k);
-  let retVal = head;
+  let slow = head
+  let fast = getFast(head, k)
+  let retVal = head
   while (fast && fast.next) {
-    fast = fast.next;
-    slow = slow.next;
+    fast = fast.next
+    slow = slow.next
   }
   if (fast) {
-    fast.next = head;
-    retVal = slow.next;
-    slow.next = null;
+    fast.next = head
+    retVal = slow.next
+    slow.next = null
   }
-  return retVal;
-};
+  return retVal
+}
 
 module.exports = {
   testFunc: rotateRight
-};
+}

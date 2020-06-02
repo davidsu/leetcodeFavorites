@@ -38,14 +38,14 @@
  * @return {number}
  */
 const findUnsortedSubarray = function (nums) {
-  const sorted = [...nums].sort((a, b) => a - b);
-  let start = 0;
-  let end = nums.length - 1;
-  while (start < end && nums[start] === sorted[start]) start++;
-  while (end > start && nums[end] === sorted[end]) end--;
-  return end > start ? end - start + 1 : 0;
-};
+  const sorted = [...nums].sort((a, b) => a - b)
+  let start = 0
+  let end = nums.length - 1
+  while (start < end && nums[start] === sorted[start]) start++
+  while (end > start && nums[end] === sorted[end]) end--
+  return end > start ? end - start + 1 : 0
+}
 
 module.exports = {
   findUnsortedSubarray
-};
+}

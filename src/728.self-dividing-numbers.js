@@ -43,14 +43,14 @@
 const isSelfDividing = (n) =>
   String(n)
     .split('')
-    .every((digit) => Number(digit) && !(n % digit));
+    .every((digit) => Number(digit) && !(n % digit))
 
 const selfDividingNumbers = (left, right) =>
   new Array(right - left + 1)
     .fill(0)
     .map((_, i) => left + i)
-    .filter(isSelfDividing);
+    .filter(isSelfDividing)
 
 module.exports = {
   selfDividingNumbers
-};
+}

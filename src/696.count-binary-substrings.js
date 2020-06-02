@@ -50,27 +50,27 @@
  * @return {number}
  */
 const countBinarySubstrings = function (s) {
-  let idxs = [0, 0];
-  let result = 0;
+  let idxs = [0, 0]
+  let result = 0
   for (let idx = 0; idx < s.length; idx++) {
     if (s[idx] !== s[idx + 1]) {
-      const [start, cont] = idxs;
-      const end = idx + 1;
-      result += Math.min(cont - start, end - cont);
-      idxs = [cont, end];
+      const [start, cont] = idxs
+      const end = idx + 1
+      result += Math.min(cont - start, end - cont)
+      idxs = [cont, end]
     }
   }
-  return result;
-};
+  return result
+}
 
 const countBinarySubstrings2 = (s) =>
   s
     .replace(/01/g, '0,1')
     .replace(/10/g, '1,0')
     .split(',')
-    .reduce((res, a, i, arr) => (i ? res + Math.min(a.length, arr[--i].length) : 0), 0);
+    .reduce((res, a, i, arr) => (i ? res + Math.min(a.length, arr[--i].length) : 0), 0)
 
 module.exports = {
   testFunc: countBinarySubstrings,
   countBinarySubstrings2
-};
+}
