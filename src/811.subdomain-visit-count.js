@@ -68,7 +68,7 @@
  * @param {string[]} cpdomains
  * @return {string[]}
  */
-const toFrequency = (cpdomains) =>
+const toFrequency = cpdomains =>
   cpdomains.reduce((result, val) => {
     let [num, domain] = val.split(' ')
     while (domain) {
@@ -78,9 +78,9 @@ const toFrequency = (cpdomains) =>
     return result
   }, {})
 
-const frequencyToResult = (freq) => Object.entries(freq).map(([key, val]) => `${val} ${key}`)
+const frequencyToResult = freq => Object.entries(freq).map(([key, val]) => `${val} ${key}`)
 
-const subdomainVisits = (cpdomains) => frequencyToResult(toFrequency(cpdomains))
+const subdomainVisits = cpdomains => frequencyToResult(toFrequency(cpdomains))
 module.exports = {
   subdomainVisits
 }

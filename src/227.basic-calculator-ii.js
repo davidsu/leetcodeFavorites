@@ -73,12 +73,12 @@ function runOp(num, sign, stack) {
   const result = stack.pop() / num
   stack.push(result > 0 ? Math.floor(result) : Math.ceil(result))
 }
-const stackBased = (s) => {
+const stackBased = s => {
   let sign = '+'
   let num = 0
   const stack = []
   const isNumRegex = /\d/
-  const isNum = (n) => isNumRegex.test(n)
+  const isNum = n => isNumRegex.test(n)
   for (const c of s.replace(/\s+/g, '').split('')) {
     if (isNum(c)) {
       num = num * 10 + Number(c)

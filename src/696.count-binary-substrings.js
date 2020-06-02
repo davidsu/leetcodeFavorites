@@ -63,7 +63,7 @@ const countBinarySubstrings = function (s) {
   return result
 }
 
-const countBinarySubstrings2 = (s) =>
+const countBinarySubstrings2 = s =>
   s
     .replace(/01/g, '0,1')
     .replace(/10/g, '1,0')

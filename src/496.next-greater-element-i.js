@@ -74,7 +74,7 @@ function nextGreaterElement(nums1, nums2) {
     return res
   }
   const map = mapCreator()
-  return nums1.map((n) => map[n] || -1)
+  return nums1.map(n => map[n] || -1)
 }
 
 module.exports = {

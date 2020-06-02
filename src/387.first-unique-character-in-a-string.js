@@ -39,7 +39,7 @@ const firstUniqChar = function (s) {
     acc[c] = (acc[c] || 0) + 1
     return acc
   }, {})
-  return sArr.findIndex((c) => frequencies[c] === 1)
+  return sArr.findIndex(c => frequencies[c] === 1)
 }
 
 module.exports = {

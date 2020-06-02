@@ -54,17 +54,17 @@
  * @param {number} num
  * @return {number}
  */
-const naive = (num) =>
+const naive = num =>
   parseInt(
     (num >>> 0)
       .toString(2)
       .split('')
       .map(Number)
-      .map((a) => (a + 1) % 2)
+      .map(a => (a + 1) % 2)
       .join(''),
     2
   )
-const better = (num) => {
+const better = num => {
   let mask = 1
   while (mask < num) {
     mask = (mask << 1) | 1

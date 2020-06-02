@@ -85,13 +85,13 @@ const letters = [
   '--..'
 ]
 const a = 'a'.codePointAt(0)
-const getLetter = (letter) => letters[letter.codePointAt(0) - a]
-const uniqueMorseRepresentations = (words) =>
+const getLetter = letter => letters[letter.codePointAt(0) - a]
+const uniqueMorseRepresentations = words =>
   new Set(
-    words.map((word) =>
+    words.map(word =>
       word
         .split('')
-        .map((letter) => getLetter(letter))
+        .map(letter => getLetter(letter))
         .join('')
     )
   ).size

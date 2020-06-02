@@ -45,7 +45,7 @@
  * @param {number[]} nums
  * @return {boolean}
  */
-const nonDecreasingIndex = (nums) => nums.findIndex((val, idx) => val > nums[idx + 1])
+const nonDecreasingIndex = nums => nums.findIndex((val, idx) => val > nums[idx + 1])
 function checkPossibility(nums) {
   const idx = nonDecreasingIndex(nums)
   if (idx === -1) return true

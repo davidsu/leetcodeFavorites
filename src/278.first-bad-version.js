@@ -50,7 +50,7 @@
  * @param {function} isBadVersion()
  * @return {function}
  */
-const solution = (isBadVersion) => (n) => {
+const solution = isBadVersion => n => {
   let low = 1
   let high = n
   while (low < high) {

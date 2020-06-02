@@ -78,7 +78,7 @@
  * @param {number[][]} dislikes
  * @return {boolean}
  */
-const buildGraph = (dislikes) =>
+const buildGraph = dislikes =>
   dislikes.reduce((g, [a, b]) => {
     g[a] = g[a] || new Set()
     g[b] = g[b] || new Set()

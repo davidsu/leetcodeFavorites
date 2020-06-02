@@ -59,7 +59,7 @@ function pathSum(root, sum) {
   }
   return pathSum(root.left, sum - root.val)
     .concat(pathSum(root.right, sum - root.val))
-    .filter((a) => a.length)
+    .filter(a => a.length)
     .reduce((acc, arr) => acc.push([root.val, ...arr]) && acc, [])
 }
 

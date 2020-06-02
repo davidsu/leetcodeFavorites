@@ -58,7 +58,7 @@ const canFinish = function (numCourses, prerequisites) {
   for (const [course, needs] of prerequisites) {
     g[course].add(needs)
   }
-  const dfs = (course) => {
+  const dfs = course => {
     if (!g[course].size) return true
     if (g[course].visited) return false
     g[course].visited = true
@@ -84,7 +84,7 @@ function betterPerformance(_, prerequisites) {
   while (completed.length) {
     const { next, id } = completed.pop()
     delete courses[id]
-    next.forEach((nextCourse) => {
+    next.forEach(nextCourse => {
       const course = courses[nextCourse]
       course.prerequisiteCount--
       if (!course.prerequisiteCount) {

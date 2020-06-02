@@ -89,8 +89,8 @@ const solveSudoku = function (board) {
     return true
   }
 
-  const isValidRow = (row) => isValid(board[row])
-  const isValidCol = (col) => isValid(colGenerator(col))
+  const isValidRow = row => isValid(board[row])
+  const isValidCol = col => isValid(colGenerator(col))
   const isValidBox = (row, col) => isValid(boxGenerator(row, col))
 
   function solve(row = 0, col = 0) {

@@ -41,9 +41,9 @@
  * @param {number[]} nums
  * @return {number}
  */
-const findMaxLength = (nums) =>
+const findMaxLength = nums =>
   nums
-    .map((v) => v || -1)
+    .map(v => v || -1)
     .reduce(
       ({ max, hash, count }, num, i) => {
         count += num

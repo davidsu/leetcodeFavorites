@@ -56,10 +56,10 @@ function reverseVowels(s = '') {
 
 function functionalReverseVowels(s) {
   const regex = /[aeiou]/i
-  const vowels = s.split('').filter((c) => regex.test(c))
+  const vowels = s.split('').filter(c => regex.test(c))
   return s
     .split('')
-    .map((c) => (regex.test(c) ? vowels.pop() : c))
+    .map(c => (regex.test(c) ? vowels.pop() : c))
     .join('')
 }
 module.exports = {

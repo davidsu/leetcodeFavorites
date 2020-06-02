@@ -62,10 +62,10 @@
  * @param {number} n
  * @return {number}
  */
-const getSum = (num) => (num === 0 ? 0 : (num % 10) + getSum(Math.floor(num / 10)))
-const reducer = (max) => (total, sum) => total + (sum === max)
+const getSum = num => (num === 0 ? 0 : (num % 10) + getSum(Math.floor(num / 10)))
+const reducer = max => (total, sum) => total + (sum === max)
 
-const countLargestGroup = (n) => {
+const countLargestGroup = n => {
   const results = []
 
   while (n > 0) {

@@ -64,7 +64,7 @@
  * @param {number[]} nums
  * @return {number}
  */
-const minStartValue = (nums) =>
+const minStartValue = nums =>
   -nums.reduce(
     ({ sum, min }, val) => ({
       sum: val + sum,

@@ -63,9 +63,9 @@
  * @param {number[]} A
  * @return {number}
  */
-const repeatedNTimes = (A) => {
+const repeatedNTimes = A => {
   const seen = {}
-  return A.find((n) => n in seen || (seen[n] = 0))
+  return A.find(n => n in seen || (seen[n] = 0))
 }
 
 module.exports = {

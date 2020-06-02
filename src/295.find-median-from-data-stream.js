@@ -58,10 +58,10 @@
  */
 function heap(compare) {
   const nums = []
-  const getParent = (idx) => parseInt((idx - 1) / 2)
-  const getLeft = (idx) => (idx + 1) * 2 - 1
-  const getRight = (idx) => getLeft(idx) + 1
-  const exists = (idx) => idx < nums.length
+  const getParent = idx => parseInt((idx - 1) / 2)
+  const getLeft = idx => (idx + 1) * 2 - 1
+  const getRight = idx => getLeft(idx) + 1
+  const exists = idx => idx < nums.length
   const swap = (i, j) => {
     ;[nums[i], nums[j]] = [nums[j], nums[i]]
   }

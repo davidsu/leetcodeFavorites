@@ -1,4 +1,4 @@
-const squareSum = (n) => {
+const squareSum = n => {
   let result = 0
   while (n) {
     result = result + (n % 10) * (n % 10)

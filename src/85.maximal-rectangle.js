@@ -32,7 +32,7 @@
  * @param {character[][]} matrix
  * @return {number}
  */
-const indexes = (arr) => arr.map((_, idx) => idx)
+const indexes = arr => arr.map((_, idx) => idx)
 
 function maximalRectangle(matrix) {
   const expandRight = (row, col, max) => (matrix[row][col] === '1' && col <= max ? expandRight(row, col + 1, max) || col : col - 1)

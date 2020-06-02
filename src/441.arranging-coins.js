@@ -50,7 +50,7 @@
  * @param {number} n
  * @return {number}
  */
-const arrangeCoins = (n) => {
+const arrangeCoins = n => {
   let low = 0
   let high = n
   while (low < high) {

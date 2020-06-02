@@ -39,7 +39,7 @@
  * @param {string} magazine
  * @return {boolean}
  */
-const strToFrequency = (str) =>
+const strToFrequency = str =>
   str.split('').reduce((acc, c) => {
     acc[c] = (acc[c] || 0) + 1
     return acc

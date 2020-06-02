@@ -94,8 +94,8 @@ function ladderLength(beginWord, endWord, wordList) {
     const [curr, distance] = next[idx++]
     if (curr === endWord) return distance
     Array.from(generateAllDistanceOneWords(curr))
-      .filter((candidate) => unseen.has(candidate))
-      .forEach((nextStep) => {
+      .filter(candidate => unseen.has(candidate))
+      .forEach(nextStep => {
         unseen.delete(nextStep)
         next.push([nextStep, distance + 1])
       })

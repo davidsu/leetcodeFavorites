@@ -49,6 +49,6 @@
  */
 const numJewelsInStones = (J, S) => {
   const jewels = new Set(J.split(''))
-  return S.split('').filter((stone) => jewels.has(stone)).length
+  return S.split('').filter(stone => jewels.has(stone)).length
 }
 module.exports = { numJewelsInStones }

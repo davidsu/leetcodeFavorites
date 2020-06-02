@@ -45,7 +45,7 @@
  */
 const intersection = function (nums1, nums2) {
   const n2Set = new Set(nums2)
-  return [...new Set(nums1)].filter((a) => n2Set.has(a))
+  return [...new Set(nums1)].filter(a => n2Set.has(a))
 }
 
 module.exports = {
