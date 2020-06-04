@@ -30,6 +30,10 @@ function shouldUseProblemByDifficultyLevel (problem) {
   return true
 }
 
+let solved
+const getSolved = () => solved || (solved = new Set(fs.readdirSync('./src').map(fileName => Number(fileName.replace(/^(\d+).*/, '$1')))))
+const filterOutSolvedProblems = ({ fid }) => !yargs.argv.noRepeat || !getSolved().has(fid)
+
 async function sortProblemByLike () {
   const problems = await getAllProblems()
   const mapper = ({ fid }) =>
@@ -44,6 +48,7 @@ async function sortProblemByLike () {
     .filter((promise) => !!promise.value)
     .map((promise) => promise.value)
     .filter(shouldUseProblemByDifficultyLevel)
+    .filter(filterOutSolvedProblems)
     .sort((a, b) => b.likes - a.likes)
 }
 
@@ -97,7 +102,7 @@ function showAndGenerateProblem ({ fid, slug }) {
 const printProblems = (p) => p.forEach((p, i) => console.log(`${i}. `, JSON.stringify(p)))
 async function getRandom () {
   const problems = (await sortProblemByLike()).filter(({ likes, dislikes }) => dislikes < likes * 3)
-  printProblems(problems)
+  // printProblems(problems)
   const idx = Math.floor(Math.random() * Math.min(300, problems.length))
   return problems[idx]
 }
@@ -163,6 +168,12 @@ yargs // eslint-disable-line no-unused-expressions
     alias: 'hard',
     default: false,
     describe: 'select only hard problems',
+    type: 'boolean'
+  })
+  .option('no-repeat', {
+    alias: 'n',
+    default: false,
+    describe: 'select only problems not previously solved',
     type: 'boolean'
   })
   .help('h')
