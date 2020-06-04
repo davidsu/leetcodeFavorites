@@ -56,31 +56,18 @@
  * @param {TreeNode} root
  * @return {number}
  */
-const sumroottoleaf = function (root) {
-  const q = []
-  const vals = []
-  const peek = () => q[q.length - 1]
-  const isLeaf = node => !node.left && !node.right
-  while (q.length || root) {
-    if (root) {
-      q.push(root)
-      root = root.left
-    } else {
-      const parent = peek()
-      if (!parent.isVisited && isLeaf(parent)) {
-        vals.push(q.map(a => a.val).join(''))
-      }
-      if (!parent.isVisited) {
-        parent.isVisited = true
-        root = parent.right
-      } else {
-        q.pop()
-      }
-    }
+const sumRootToLeaf = function (root) {
+  const stack = [[root, '']]
+  let result = 0
+  while (stack.length) {
+    const [{ val, left, right }, acc] = stack.pop()
+    if (left) stack.push([left, acc + val])
+    if (right) stack.push([right, acc + val])
+    if (!left && !right) result += parseInt(acc + val, 2)
   }
-  return vals.reduce((total, n) => total + parseInt(n, 2), 0)
+  return result
 }
 
 module.exports = {
-  sumroottoleaf
+  sumRootToLeaf
 }
