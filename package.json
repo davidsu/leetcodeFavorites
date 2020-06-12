@@ -16,7 +16,8 @@
   "scripts": {
     "lint": "eslint .",
     "test": "jest",
-    "problem": "node ./index.js random"
+    "problem": "node ./index.js random",
+    "watch": "find src/ test/ | entr -cr runjest $(git status | grep test)"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
