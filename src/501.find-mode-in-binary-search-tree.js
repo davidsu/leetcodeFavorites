@@ -59,7 +59,7 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-// TODO: suppose that equal values are allways linked together. 
+// TODO: suppose that equal values are allways linked together.
 // implement with real O(1) space - hint: 2pass solution
 const findMode = function (root) {
   if (!root) return []
