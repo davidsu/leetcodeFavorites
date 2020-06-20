@@ -56,7 +56,8 @@
  * @param {string} second
  * @return {string[]}
  */
-const findOcurrences = (text, first, second) => text.match(new RegExp(`(?<=\\b${first} ${second}\\s)\\w+`, 'g')) || []
+const findOcurrences = (text, first, second) =>
+  text.match(new RegExp(`(?<=\\b${first} ${second}\\s)\\w+`, 'g')) || []
 
 module.exports = {
   findOcurrences

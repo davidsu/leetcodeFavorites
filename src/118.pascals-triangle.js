@@ -41,7 +41,9 @@ const get = (arr = [], i) => arr[i] || 0
 const generate = function (numRows) {
   const result = new Array(numRows)
   for (let i = 0; i < numRows; i++) {
-    result[i] = new Array(i + 1).fill(0).map((val, idx) => get(result[i - 1], idx - 1) + get(result[i - 1], idx) || 1)
+    result[i] = new Array(i + 1)
+      .fill(0)
+      .map((val, idx) => get(result[i - 1], idx - 1) + get(result[i - 1], idx) || 1)
   }
   return result
 }

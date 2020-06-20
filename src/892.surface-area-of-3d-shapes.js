@@ -95,7 +95,8 @@ const surfaceArea = function (grid) {
     for (let j = 0; j < grid[i].length; j++) {
       const curr = cellValue(i, j)
       if (curr) {
-        const compensate = 2 * Math.min(cellValue(i - 1, j), curr) + 2 * Math.min(cellValue(i, j - 1), curr)
+        const compensate =
+          2 * Math.min(cellValue(i - 1, j), curr) + 2 * Math.min(cellValue(i, j - 1), curr)
         result += curr * 4 + 2 - compensate
       }
     }
@@ -106,7 +107,8 @@ const surfaceArea = function (grid) {
 const cellValue = (grid, i, j) => (grid[i] && grid[i][j]) || 0
 const itemReducer = (grid, i) => (res, curr, j) => {
   if (!curr) return res
-  const compensate = 2 * Math.min(cellValue(grid, i - 1, j), curr) + 2 * Math.min(cellValue(grid, i, j - 1), curr)
+  const compensate =
+    2 * Math.min(cellValue(grid, i - 1, j), curr) + 2 * Math.min(cellValue(grid, i, j - 1), curr)
   return res + curr * 4 + 2 - compensate
 }
 const rowReducer = grid => (result, arr, i) => arr.reduce(itemReducer(grid, i), result)

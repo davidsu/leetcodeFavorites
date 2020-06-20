@@ -90,9 +90,12 @@
  * @param {string} IP
  * @return {string}
  */
-const isValidIpv6 = ip => ip.split(':').length === 8 && ip.split(':').every(a => /^[0-9a-f]{1,4}$/i.test(a))
+const isValidIpv6 = ip =>
+  ip.split(':').length === 8 && ip.split(':').every(a => /^[0-9a-f]{1,4}$/i.test(a))
 
-const isValidIpv4 = ip => ip.split('.').length === 4 && ip.split('.').every(a => Number(a) < 256 && /^(0|[1-9]\d{0,2})$/.test(a))
+const isValidIpv4 = ip =>
+  ip.split('.').length === 4 &&
+  ip.split('.').every(a => Number(a) < 256 && /^(0|[1-9]\d{0,2})$/.test(a))
 
 const validIPAddress = IP => (isValidIpv4(IP) ? 'IPv4' : isValidIpv6(IP) ? 'IPv6' : 'Neither')
 

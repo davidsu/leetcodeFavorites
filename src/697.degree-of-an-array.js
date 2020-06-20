@@ -46,7 +46,8 @@
  * @param {number[]} nums
  * @return {number}
  */
-const isBetter = (candidate, best) => candidate.freq > best.freq || (candidate.freq === best.freq && candidate.total < best.total)
+const isBetter = (candidate, best) =>
+  candidate.freq > best.freq || (candidate.freq === best.freq && candidate.total < best.total)
 const findShortestSubArray = nums =>
   nums.reduce(
     (acc, num, idx) => {

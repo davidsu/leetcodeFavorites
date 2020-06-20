@@ -94,7 +94,9 @@ const gameOfLife = function (board) {
       const alive = !!board[i][j]
       const aliveIndicator = alive ? 10 : 20
       const liveNeighbotCount = getLiveNeighborCount(i, j)
-      const willLive = (alive && (liveNeighbotCount === 2 || liveNeighbotCount === 3)) || (!alive && liveNeighbotCount === 3)
+      const willLive =
+        (alive && (liveNeighbotCount === 2 || liveNeighbotCount === 3)) ||
+        (!alive && liveNeighbotCount === 3)
       board[i][j] = aliveIndicator + willLive
     }
   }

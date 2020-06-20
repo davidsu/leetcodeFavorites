@@ -81,7 +81,8 @@
  * @param {string} searchWord
  * @return {number}
  */
-const isPrefixOfWord = (sentence, searchWord) => sentence.split(' ').findIndex(str => str.indexOf(searchWord) === 0) + 1 || -1
+const isPrefixOfWord = (sentence, searchWord) =>
+  sentence.split(' ').findIndex(str => str.indexOf(searchWord) === 0) + 1 || -1
 
 module.exports = {
   isPrefixOfWord

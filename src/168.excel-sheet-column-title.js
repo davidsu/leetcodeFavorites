@@ -52,7 +52,11 @@
  * @param {number} n
  * @return {string}
  */
-const convertToTitle = n => (n === 0 ? '' : convertToTitle(Math.floor((n - 1) / 26)) + String.fromCharCode('A'.charCodeAt(0) + ((n - 1) % 26)))
+const convertToTitle = n =>
+  n === 0
+    ? ''
+    : convertToTitle(Math.floor((n - 1) / 26)) +
+      String.fromCharCode('A'.charCodeAt(0) + ((n - 1) % 26))
 
 module.exports = {
   convertToTitle

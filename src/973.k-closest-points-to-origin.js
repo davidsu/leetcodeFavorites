@@ -62,5 +62,6 @@
  * @param {number} K
  * @return {number[][]}
  */
-const kClosest = (points, K) => points.sort(([p1x, p1y], [p2x, p2y]) => p1x ** 2 + p1y ** 2 - (p2x ** 2 + p2y ** 2)).slice(0, K)
+const kClosest = (points, K) =>
+  points.sort(([p1x, p1y], [p2x, p2y]) => p1x ** 2 + p1y ** 2 - (p2x ** 2 + p2y ** 2)).slice(0, K)
 module.exports = { kClosest }

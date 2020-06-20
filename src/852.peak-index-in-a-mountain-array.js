@@ -52,7 +52,9 @@
  */
 // TODO: better one liner, better runtime -> 2 solutions
 const peakIndexInMountainArray = (A, start = 0, end = A.length - 1) =>
-  start === end ? start : peakIndexInMountainArray(A, start + (A[start] < A[start + 1]), end - (A[end] < A[end - 1]))
+  start === end
+    ? start
+    : peakIndexInMountainArray(A, start + (A[start] < A[start + 1]), end - (A[end] < A[end - 1]))
 module.exports = {
   peakIndexInMountainArray
 }

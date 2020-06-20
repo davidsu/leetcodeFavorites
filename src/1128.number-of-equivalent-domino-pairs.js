@@ -42,7 +42,8 @@ const frequency = dominoes =>
     return m
   }, {})
 const frequencyToTotalReducer = (result, count) => result + (count * (count - 1)) / 2
-const numEquivDominoPairs = dominoes => Object.values(frequency(dominoes)).reduce(frequencyToTotalReducer, 0)
+const numEquivDominoPairs = dominoes =>
+  Object.values(frequency(dominoes)).reduce(frequencyToTotalReducer, 0)
 
 module.exports = {
   numEquivDominoPairs

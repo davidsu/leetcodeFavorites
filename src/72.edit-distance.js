@@ -53,7 +53,9 @@
  * @return {number}
  */
 const minDistance = (word1, word2) => {
-  const dp = new Array(word1.length + 1).fill(0).map((_, idx) => new Array(word2.length + 1).fill(idx))
+  const dp = new Array(word1.length + 1)
+    .fill(0)
+    .map((_, idx) => new Array(word2.length + 1).fill(idx))
   dp[0] = dp[0].map((_, idx) => idx)
   for (let row = 1; row <= word1.length; row++) {
     for (let col = 1; col <= word2.length; col++) {

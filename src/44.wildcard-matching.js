@@ -90,7 +90,9 @@ const isMatch = function (s, p) {
   const seen = new Set()
   const matchChar = (idxS, idxP) => s[idxS] === p[idxP] && matches(idxS + 1, idxP + 1)
   const matchSingle = (idxS, idxP) => p[idxP] === '?' && matches(idxS + 1, idxP + 1)
-  const matchStar = (idxS, idxP) => p[idxP] === '*' && (matches(idxS + 1, idxP) || matches(idxS + 1, idxP + 1) || matches(idxS, idxP + 1))
+  const matchStar = (idxS, idxP) =>
+    p[idxP] === '*' &&
+    (matches(idxS + 1, idxP) || matches(idxS + 1, idxP + 1) || matches(idxS, idxP + 1))
   const matches = (idxS, idxP) => {
     const key = `${idxS},${idxP}`
     if (seen.has(key)) return false

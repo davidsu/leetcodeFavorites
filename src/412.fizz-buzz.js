@@ -47,7 +47,8 @@
  * @param {number} n
  * @return {string[]}
  */
-const fizzBuzz = n => Array.from({ length: n }, (_, i) => (++i % 3 ? '' : 'Fizz') + (i % 5 ? '' : 'Buzz') || `${i}`)
+const fizzBuzz = n =>
+  Array.from({ length: n }, (_, i) => (++i % 3 ? '' : 'Fizz') + (i % 5 ? '' : 'Buzz') || `${i}`)
 
 module.exports = {
   fizzBuzz

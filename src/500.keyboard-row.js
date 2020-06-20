@@ -42,9 +42,12 @@
  * @return {string[]}
  */
 const findWords = function (words) {
-  const sets = ['QWERTYUIOP{}qwertyuiop[]', 'asdfghjkl;\'\\ASDFGHJKL:"|', 'ZXCVBNM<>?zxcvbnm,./', '1234567890--=!@#$%^&*()____+~`'].map(
-    a => new Set(a.split(''))
-  )
+  const sets = [
+    'QWERTYUIOP{}qwertyuiop[]',
+    'asdfghjkl;\'\\ASDFGHJKL:"|',
+    'ZXCVBNM<>?zxcvbnm,./',
+    '1234567890--=!@#$%^&*()____+~`'
+  ].map(a => new Set(a.split('')))
   return words.filter(w => sets.find(s => w.split('').every(c => s.has(c))))
 }
 

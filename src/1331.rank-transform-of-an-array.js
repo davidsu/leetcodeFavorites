@@ -60,7 +60,9 @@
  * @return {number[]}
  */
 const arrayRankTransform = function (arr) {
-  const ranks = Object.fromEntries([...new Set(arr)].sort((a, b) => a - b).map((n, i) => [n, i + 1]))
+  const ranks = Object.fromEntries(
+    [...new Set(arr)].sort((a, b) => a - b).map((n, i) => [n, i + 1])
+  )
   return arr.map(n => ranks[n])
 }
 

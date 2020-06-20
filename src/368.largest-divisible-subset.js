@@ -49,7 +49,10 @@ const largestDivisibleSubset2 = nums => {
     results[num] = [num]
     for (let j = i - 1; j >= 0; j--) {
       const other = nums[j]
-      if (other % num === 0 && (results[num].length === 1 || results[other].length >= results[num].length)) {
+      if (
+        other % num === 0 &&
+        (results[num].length === 1 || results[other].length >= results[num].length)
+      ) {
         results[num] = [num, ...results[other]]
       }
     }
@@ -74,7 +77,8 @@ const reducer = (acc, num, i, nums) => {
   return acc
 }
 
-const largestDivisibleSubset = nums => nums.sort((a, b) => b - a).reduce(reducer, { result: [], dp: [] }).result
+const largestDivisibleSubset = nums =>
+  nums.sort((a, b) => b - a).reduce(reducer, { result: [], dp: [] }).result
 module.exports = {
   largestDivisibleSubset2,
   largestDivisibleSubset

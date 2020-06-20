@@ -63,14 +63,20 @@ function relaxNieghbors(RED, BLUE, cost, neighbors, graph) {
     const otherColor = (color + 1) % 2
     if (cost[color] < Infinity) {
       for (const neighbor of neighbors[otherColor]) {
-        graph[neighbor].cost[otherColor] = Math.min(graph[neighbor].cost[otherColor], cost[color] + 1)
+        graph[neighbor].cost[otherColor] = Math.min(
+          graph[neighbor].cost[otherColor],
+          cost[color] + 1
+        )
       }
     }
   }
 }
 
 function buildGraph(n, redEdges, RED, blueEdges, BLUE) {
-  const graph = Array.from({ length: n }, () => ({ cost: [Infinity, Infinity], neighbors: [new Set(), new Set()] }))
+  const graph = Array.from({ length: n }, () => ({
+    cost: [Infinity, Infinity],
+    neighbors: [new Set(), new Set()]
+  }))
   const fillGraph = (edges, color) => {
     edges.forEach(([src, dst]) => {
       graph[src].neighbors[color].add(dst)
@@ -92,7 +98,9 @@ const shortestAlternatingPaths = function (n, redEdges, blueEdges) {
       relaxNieghbors(RED, BLUE, cost, neighbors, graph)
     }
   }
-  return graph.map(({ cost }) => Math.min(cost[RED], cost[BLUE])).map(cost => (cost === Infinity ? -1 : cost))
+  return graph
+    .map(({ cost }) => Math.min(cost[RED], cost[BLUE]))
+    .map(cost => (cost === Infinity ? -1 : cost))
 }
 
 module.exports = {

@@ -60,7 +60,8 @@
  * @param {Node} root
  * @return {number}
  */
-const maxDepth = root => (root ? 1 + Math.max(0, ...root.children.map(child => maxDepth(child))) : 0)
+const maxDepth = root =>
+  root ? 1 + Math.max(0, ...root.children.map(child => maxDepth(child))) : 0
 
 module.exports = {
   maxDepth

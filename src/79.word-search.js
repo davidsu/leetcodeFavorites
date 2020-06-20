@@ -47,7 +47,13 @@ function exist(board, word) {
     if (!board[i] || board[i][j] !== word[idx]) return false
     const next = idx + 1
     seen[key] = true
-    if (calc(next, i + 1, j, seen) || calc(next, i - 1, j, seen) || calc(next, i, j - 1, seen) || calc(next, i, j + 1, seen)) return true
+    if (
+      calc(next, i + 1, j, seen) ||
+      calc(next, i - 1, j, seen) ||
+      calc(next, i, j - 1, seen) ||
+      calc(next, i, j + 1, seen)
+    )
+      return true
     delete seen[key]
     return false
   }

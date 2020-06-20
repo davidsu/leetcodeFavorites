@@ -35,9 +35,15 @@
 const indexes = arr => arr.map((_, idx) => idx)
 
 function maximalRectangle(matrix) {
-  const expandRight = (row, col, max) => (matrix[row][col] === '1' && col <= max ? expandRight(row, col + 1, max) || col : col - 1)
+  const expandRight = (row, col, max) =>
+    matrix[row][col] === '1' && col <= max ? expandRight(row, col + 1, max) || col : col - 1
 
-  const expand = ([startRow, startCol], row = startRow, col = startCol, max = matrix[0].length - 1) => {
+  const expand = (
+    [startRow, startCol],
+    row = startRow,
+    col = startCol,
+    max = matrix[0].length - 1
+  ) => {
     if (matrix[row] && matrix[row][col] === '1') {
       const nextCol = expandRight(row, col, max)
       const count = (row - startRow + 1) * (nextCol - startCol + 1)

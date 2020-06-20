@@ -94,8 +94,10 @@ const regExBased = s =>
 
 // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split#Description
 // for why this split works the way it does
-const betterRegExBased = s => s.split(/((\w)\2*)/).reduce((max, str) => Math.max(max, str.length), 0)
-const sameAsAboveWithNamedGroups = s => s.split(/((?<char>\w)\k<char>*)/).reduce((max, str) => Math.max(max, str.length), 0)
+const betterRegExBased = s =>
+  s.split(/((\w)\2*)/).reduce((max, str) => Math.max(max, str.length), 0)
+const sameAsAboveWithNamedGroups = s =>
+  s.split(/((?<char>\w)\k<char>*)/).reduce((max, str) => Math.max(max, str.length), 0)
 
 module.exports = {
   maxPower,

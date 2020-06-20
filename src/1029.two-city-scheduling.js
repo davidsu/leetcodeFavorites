@@ -50,7 +50,9 @@
  * @return {number}
  */
 const twoCitySchedCost = costs =>
-  costs.sort(([aa, ab], [ba, bb]) => bb - ba - (ab - aa)).reduce((total, [a, b], i) => total + (i < costs.length / 2 ? a : b), 0)
+  costs
+    .sort(([aa, ab], [ba, bb]) => bb - ba - (ab - aa))
+    .reduce((total, [a, b], i) => total + (i < costs.length / 2 ? a : b), 0)
 
 module.exports = {
   twoCitySchedCost
