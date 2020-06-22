@@ -102,6 +102,10 @@ function showAndGenerateProblem ({ fid, slug }) {
 const printProblems = (p) => p.forEach((p, i) => console.log(`${i}. `, JSON.stringify(p)))
 async function getRandom () {
   const problems = (await sortProblemByLike()).filter(({ likes, dislikes }) => dislikes < likes * 3)
+  if (!problems.length) {
+    console.log('no more problems matching criteria')
+    process.exit(0)
+  }
   // printProblems(problems)
   const idx = Math.floor(Math.random() * Math.min(300, problems.length))
   return problems[idx]
