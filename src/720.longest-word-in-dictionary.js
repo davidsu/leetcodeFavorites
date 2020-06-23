@@ -63,7 +63,6 @@ const longestWord = words =>
     { result: '', seen: new Set(['']) }
   ).result
 
-const longestWord = words =>
 module.exports = {
   longestWord
 }

@@ -9,6 +9,6 @@ describe.each(
     expect(testFunc([[0, 0, 0], [1, 1, 0], [1, 1, 0]])).toEqual(4)
   })
   it('case 3', () => {
-    expect(testFunc([[1,0,0],[1,1,0],[1,1,0]])).toEqual(-1)
+    expect(testFunc([[1, 0, 0], [1, 1, 0], [1, 1, 0]])).toEqual(-1)
   })
 })
