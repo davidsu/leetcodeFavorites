@@ -43,7 +43,7 @@
  * @param {number} num
  * @return {number}
  */
-//TODO: solve with O(n) single pass solution
+// TODO: solve with O(n) single pass solution
 const maximumSwap = num => {
   const numAsArray = num
     .toString(10)
