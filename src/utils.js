@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-const print2d = arr => console.log(arr.reduce((res, a) => `${res}\n${a.join(', ')}`, ''))
+const print2d = (arr, stringify = a => a) =>
+  console.log(arr.reduce((res, a) => `${res}\n${a.map(stringify).join(', ')}`, ''))
 module.exports = {
   print2d
 }
