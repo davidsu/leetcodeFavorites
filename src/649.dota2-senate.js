@@ -102,7 +102,7 @@ const predictPartyVictory = function (senate) {
     next = []
     for (const party of last) {
       has[party] = true
-      const lastSeen = next.length? next[next.length - 1] : last[last.length - 1]
+      const lastSeen = next.length ? next[next.length - 1] : last[last.length - 1]
       if (count === 0 || lastSeen === party) {
         next.push(party)
         count++
