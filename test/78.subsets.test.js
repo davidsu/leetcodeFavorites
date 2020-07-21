@@ -4,7 +4,6 @@ describe.each(
 )('%s', (_, testFunc) => {
   it('case 1', () => {
     const result = testFunc([1, 2, 3]).sort((a, b) => a.length - b.length || a[0] - b[0] || a[1] - b[1])
-    require('../src/utils').print2d(result)
     expect(result).toEqual([
       [],
       [1],
