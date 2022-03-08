@@ -4,7 +4,7 @@ const Plugin = require('./node_modules/leetcode-cli/lib/plugin')
 const cli = require('./node_modules/leetcode-cli/lib/cli')
 const core = require('./node_modules/leetcode-cli/lib/core')
 const cp = require('child_process')
-const path = require('path')
+// const path = require('path')
 const fs = require('fs')
 const yargs = require('yargs')
 
@@ -92,9 +92,10 @@ function addExportToSrc ({ fid, slug }) {
   fs.appendFileSync(filePath, '\nmodule.exports = {\n\ttestFunc: null\n}')
 }
 
-function showAndGenerateProblem ({ fid, slug }) {
-  const command = `${path.resolve(__dirname, 'node_modules/.bin/leetcode')} show ${fid} -xg -o ${__dirname}/src -l javascript`
-  console.log(command)
+function showAndGenerateProblem ({ fid, slug, link }) {
+  // constgit@gitlab.walkmernd.com:walkme/applications/black-site.git command = `${path.resolve(__dirname, 'node_modules/.bin/leetcode')} show ${fid} -xg -o ${__dirname}/src -l javascript`
+  const command = `open ${link}`
+  // console.log(command)
   cp.execSync(command, { stdio: [0, 1, 2] })
   generateTestIfNeeded({ fid, slug })
   addExportToSrc({ fid, slug })
@@ -107,7 +108,7 @@ async function getRandom () {
     process.exit(0)
   }
   // printProblems(problems)
-  const idx = Math.floor(Math.random() * Math.min(300, problems.length))
+  const idx = Math.floor(Math.random() * Math.min(200, problems.length))
   return problems[idx]
 }
 
@@ -176,7 +177,7 @@ yargs // eslint-disable-line no-unused-expressions
   })
   .option('no-repeat', {
     alias: 'n',
-    default: false,
+    default: true,
     describe: 'select only problems not previously solved',
     type: 'boolean'
   })
